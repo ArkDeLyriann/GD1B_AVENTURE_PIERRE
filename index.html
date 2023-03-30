@@ -1,104 +1,11 @@
-<!doctype html> 
-<html lang="en"> 
-<head> 
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mon premier jeu en Phaser 3</title>
     <meta charset="UTF-8" />
-    <title>Making your first Phaser 3 Game - Part 1</title>
-    <script src="//cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
-    <style type="text/css">
-        body {
-            margin: 0;
-        }
-    </style>
-</head>
-<body>
+  </head>
 
-<script type="text/javascript">
-
-    var config = {
-        type: Phaser.AUTO,
-        width: 800,
-        height: 600,
-        scene: [global, cabane, cuisine, quartiers, chapelle]
-    };
-
-    var game = new Phaser.Game(config);
-
-    class global extends Phaser.Scene{
-        constructor(){
-        super("global");
-        }
-        preload(){
-        //ici le code de la fonction preload
-        }
-        create(){
-        //ici le code de la fonction create
-        }
-        update(){
-        //ici le code de la fonction update
-        }
-        };
-
-    class cabane extends Phaser.Scene{
-        constructor(){
-        super("cabane");
-        }
-        preload(){
-        //ici le code de la fonction preload
-        }
-        create(){
-        //ici le code de la fonction create
-        }
-        update(){
-        //ici le code de la fonction update
-        }
-        };
-        
-    class cuisine extends Phaser.Scene{
-        constructor(){
-        super("cuisine");
-        }
-        preload(){
-        //ici le code de la fonction preload
-        }
-        create(){
-        //ici le code de la fonction create
-        }
-        update(){
-        //ici le code de la fonction update
-        }
-        };
-
-    class quartiers extends Phaser.Scene{
-        constructor(){
-        super("quartiers");
-        }
-        preload(){
-        //ici le code de la fonction preload
-        }
-        create(){
-        //ici le code de la fonction create
-        }
-        update(){
-        //ici le code de la fonction update
-        }
-        };
-
-    class chapelle extends Phaser.Scene{
-        constructor(){
-        super("chapelle");
-        }
-        preload(){
-        //ici le code de la fonction preload
-        }
-        create(){
-        //ici le code de la fonction create
-        }
-        update(){
-        //ici le code de la fonction update
-        }
-        };
-
-</script>
-
-</body>
+  <body>
+    <script src="src/index.js"></script>
+  </body>
 </html>
