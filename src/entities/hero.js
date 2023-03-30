@@ -19,14 +19,15 @@ export default class Player extends Phaser.Physics.Arcade.Sprite{
             mouvement.x = -1;
             this.direction = "left";
             this.facing = "left";
-            console.log(this.facing);
+            
             
         } 
         else if (this.clavier.right.isDown) {
             mouvement.x = 1;
             this.direction = "right";
             this.facing = "right";
-            console.log(this.facing); 
+            console.log(this.facing);
+            
         } 
         else {
             mouvement.x = 0;
@@ -52,19 +53,29 @@ export default class Player extends Phaser.Physics.Arcade.Sprite{
         } 
         else {
             mouvement.y = 0;
-            if (this.facing == "right"){
-                this.anims.play("iddle_right", true);
-            }
-            else if (this.facing == "left")
-            {
-                this.anims.play("iddle_left", true);
-            }
+          
         }
+
+        
 
         mouvement.normalize();
         this.setVelocity(mouvement.x * PLAYER_SPEED, mouvement.y * PLAYER_SPEED);
 
         this.x = Math.round(this.x);
-        this.y = Math.round(this.y)
+        this.y = Math.round(this.y);
+
+        if (mouvement.x < 0) {
+            this.anims.play("move_left", true);
+        }
+        else if (mouvement.x > 0) {
+            this.anims.play("move_right", true);
+        }
+        else if (this.facing == "right"){
+            this.anims.play("iddle_right", true);
+        }
+        else if (this.facing == "left")
+        {
+            this.anims.play("iddle_left", true);
+        }
     }
 }

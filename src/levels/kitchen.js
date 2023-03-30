@@ -37,13 +37,15 @@ export default class kitchen extends Phaser.Scene {
     this.anims.create({
         key: "move_left",
         frames: this.anims.generateFrameNumbers("boug", { start: 8, end: 11 }),
-        frameRate: 10,
+        frameRate: 3,
+        repeat: -1
       });
     
      this.anims.create({
         key: "move_right",
         frames: this.anims.generateFrameNumbers("boug", { start: 12, end: 15 }),
-        frameRate: 10,
+        frameRate: 3,
+        repeat: -1
       });
     // on load le tiled
     const carteDuNiveau = this.add.tilemap("cuisine");
