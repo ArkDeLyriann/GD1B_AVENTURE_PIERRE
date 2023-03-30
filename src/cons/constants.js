@@ -1,2 +1,2 @@
-const GAME_WIDTH = 500;
-const GAME_HEIGHT = 500;
+const GAME_WIDTH = 1920;
+const GAME_HEIGHT = 1920;
