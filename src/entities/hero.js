@@ -9,21 +9,34 @@ export default class Player extends Phaser.Physics.Arcade.Sprite{
         this.setCollideWorldBounds(true);
     }
 
+
+    
     update(){
 
         var mouvement = new Phaser.Math.Vector2(0, 0);
         // Mouvement
         if (this.clavier.left.isDown) {
             mouvement.x = -1;
-            this.direction = "left"; 
+            this.direction = "left";
+            this.facing = "left";
+            console.log(this.facing);
+            
         } 
         else if (this.clavier.right.isDown) {
             mouvement.x = 1;
-            this.direction = "right"; 
+            this.direction = "right";
+            this.facing = "right";
+            console.log(this.facing); 
         } 
         else {
             mouvement.x = 0;
-
+            if (this.facing == "right"){
+                this.anims.play("iddle_right", true);
+            }
+            else if (this.facing == "left")
+            {
+                this.anims.play("iddle_left", true);
+            }
         }
 
         if (this.clavier.up.isDown) {
@@ -39,6 +52,13 @@ export default class Player extends Phaser.Physics.Arcade.Sprite{
         } 
         else {
             mouvement.y = 0;
+            if (this.facing == "right"){
+                this.anims.play("iddle_right", true);
+            }
+            else if (this.facing == "left")
+            {
+                this.anims.play("iddle_left", true);
+            }
         }
 
         mouvement.normalize();
