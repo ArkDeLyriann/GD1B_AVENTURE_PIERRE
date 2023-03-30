@@ -1,8 +1,10 @@
-import menu from "/src/levels/menuPrincipal.js";
-import global from "/src/levels/global.js";
+//import menu from "/src/levels/menuPrincipal.js";
+//import global from "/src/levels/global.js";
 import kitchen from "/src/levels/kitchen.js";
-import quarters from "/src/levels/quarters.js";
-import chapel from "/src/levels/chapel.js";
+//import quarters from "/src/levels/quarters.js";
+//import chapel from "/src/levels/chapel.js";
+
+
 
 var config = {
     type: Phaser.AUTO,
@@ -12,12 +14,10 @@ var config = {
       // définition des parametres physiques
       default: "arcade", // mode arcade : le plus simple : des rectangles pour gérer les collisions. Pas de pentes
       arcade: {
-        // parametres du mode arcade
-        
         debug: true // permet de voir les hitbox et les vecteurs d'acceleration quand mis à true
       }
     },
-    scene: [selection, niveau1, niveau2, niveau3]
+    scene: [kitchen]
   };
   
   // création et lancement du jeu
