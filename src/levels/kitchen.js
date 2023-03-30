@@ -9,6 +9,11 @@ export default class niveau1 extends Phaser.Scene {
     this.load.image("Phaser_sprite001", "src/assets/Sprite-0001.png");
     // chargement de la carte
     this.load.tilemapTiledJSON("cuisine", "src/assets/cuisine.json");
+
+    this.load.spritesheet("img_perso", "src/assets/spriteTest.png", {
+        frameWidth: 32,
+        frameHeight: 64
+      });
   }
 
   create() {
@@ -28,10 +33,26 @@ export default class niveau1 extends Phaser.Scene {
         );
 
     // les plateformes sont solides
-    carteCuisine.setCollisionByProperty({ estSolide: true });
-  }
+    const carteMurs = carteDuNiveau.createLayer(
+        "murs",
+        tileset
+        );
+
+    
+  
+
+    this.player = this.physics.add.sprite(1376, 1888, "img_perso");
+    this.player.refreshBody();
+    this.physics.add.collider(this.player, carteMurs);
+    carteMurs.setCollisionByExclusion(-1, true);
+
+    this.clavier = this.input.keyboard.createCursorKeys();
+    this.player.setScale(1.25);
+    this.player.setSize(24,48);
+    this.player.setOffset(6,6);
+}
 
   update(){
-
+    this.player.update();
   }
 }
