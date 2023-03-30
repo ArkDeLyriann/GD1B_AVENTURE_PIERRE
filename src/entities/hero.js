@@ -1,24 +1,23 @@
 export default class Player extends Phaser.Physics.Arcade.Sprite{
     constructor(scene, x, y, texture){
         super(scene, x, y, texture)
-        this.clavier = scene.input.keyboard.addKeys({
-            left: Phaser.Input.Keyboard.KeyCodes.LEFT,
-            right: Phaser.Input.Keyboard.KeyCodes.RIGHT,
-            up: Phaser.Input.Keyboard.KeyCodes.UP,
-            down: Phaser.Input.Keyboard.KeyCodes.DOWN,
+        this.clavier = scene.input.keyboard.createCursorKeys();
+        
 
-            attack: Phaser.Input.Keyboard.KeyCodes.SPACE,
-            shovel: Phaser.input.Keyboard.KeyCodes.A,
-        });
+        scene.physics.world.enable(this)
+        scene.add.existing(this)
+        this.setCollideWorldBounds(true);
     }
 
     update(){
+
+        var mouvement = new Phaser.Math.Vector2(0, 0);
         // Mouvement
-        if (this.clavier.left.isDown || this.pad?.left) {
+        if (this.clavier.left.isDown) {
             mouvement.x = -1;
             this.direction = "left"; 
         } 
-        else if (this.clavier.right.isDown || this.pad?.right) {
+        else if (this.clavier.right.isDown) {
             mouvement.x = 1;
             this.direction = "right"; 
         } 
@@ -27,12 +26,12 @@ export default class Player extends Phaser.Physics.Arcade.Sprite{
 
         }
 
-        if (this.clavier.up.isDown || this.pad?.up) {
+        if (this.clavier.up.isDown) {
             mouvement.y = -1;
             this.direction = "up"; 
             this.facingUp = true;
         } 
-        else if (this.clavier.down.isDown || this.pad?.down) {
+        else if (this.clavier.down.isDown) {
             mouvement.y = 1;
             this.direction = "down";
             this.facingUp = false;

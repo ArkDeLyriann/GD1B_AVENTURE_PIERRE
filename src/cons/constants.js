@@ -1,3 +1,3 @@
-const GAME_WIDTH = 1920;
-const GAME_HEIGHT = 1920;
+const GAME_WIDTH = 854;
+const GAME_HEIGHT = 480;
 const PLAYER_SPEED = 200;

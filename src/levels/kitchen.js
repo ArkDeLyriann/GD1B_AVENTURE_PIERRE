@@ -1,4 +1,6 @@
-export default class niveau1 extends Phaser.Scene {
+import Player from "../entities/hero.js";
+
+export default class kitchen extends Phaser.Scene {
   // constructeur de la classe
   constructor() {
     super({
@@ -41,18 +43,22 @@ export default class niveau1 extends Phaser.Scene {
     
   
 
-    this.player = this.physics.add.sprite(1376, 1888, "img_perso");
+    this.player = new Player(this, 1376, 1888, 'img_perso');
     this.player.refreshBody();
     this.physics.add.collider(this.player, carteMurs);
     carteMurs.setCollisionByExclusion(-1, true);
 
-    this.clavier = this.input.keyboard.createCursorKeys();
-    this.player.setScale(1.25);
+    this.player.setScale(1.5);
     this.player.setSize(24,48);
     this.player.setOffset(6,6);
+
+    this.cameras.main.setBounds(0, 0, 1600, 1600);
+    this.cameras.main.startFollow(this.player);
 }
 
   update(){
     this.player.update();
+
+
   }
 }
