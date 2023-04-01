@@ -37,14 +37,14 @@ export default class kitchen extends Phaser.Scene {
     this.anims.create({
         key: "move_left",
         frames: this.anims.generateFrameNumbers("boug", { start: 8, end: 11 }),
-        frameRate: 3,
+        frameRate: 4,
         repeat: -1
       });
     
      this.anims.create({
         key: "move_right",
         frames: this.anims.generateFrameNumbers("boug", { start: 12, end: 15 }),
-        frameRate: 3,
+        frameRate: 4,
         repeat: -1
       });
     // on load le tiled
@@ -77,7 +77,7 @@ export default class kitchen extends Phaser.Scene {
     this.physics.world.setBounds(0, 0, 1920, 1920);
     this.player.setScale(1.5);
     this.player.setSize(20,40);
-    this.player.setOffset(12,24);
+    this.player.setOffset(0,24);
 
     this.cameras.main.setBounds(0, 0, 1920, 1920);
     this.cameras.main.setZoom(1.5);
