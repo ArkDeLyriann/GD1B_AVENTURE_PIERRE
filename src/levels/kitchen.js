@@ -1,4 +1,5 @@
 import Player from "../entities/hero.js";
+import menu from "/src/levels/menuPrincipal.js";
 
 export default class kitchen extends Phaser.Scene {
   // constructeur de la classe
@@ -9,44 +10,11 @@ export default class kitchen extends Phaser.Scene {
   }
   preload() {
     this.load.image("Phaser_sprite001", "src/assets/Sprite-0001.png");
-    // chargement de la carte
-    this.load.tilemapTiledJSON("cuisine", "src/assets/cuisine.json");
 
-    this.load.spritesheet("boug", "src/assets/spriteSheetBoug.png", {
-        frameWidth: 32,
-        frameHeight: 64
-      });
   }
 
   create() {
 
-    this.anims.create({
-        key: "iddle_left",
-        frames: this.anims.generateFrameNumbers("boug", { start: 0, end: 3 }),
-        frameRate: 4,
-        repeat: -1
-      });
-    
-    this.anims.create({
-        key: "iddle_right",
-        frames: this.anims.generateFrameNumbers("boug", { start: 4, end: 7 }),
-        frameRate: 4,
-        repeat: -1
-      });
-
-    this.anims.create({
-        key: "move_left",
-        frames: this.anims.generateFrameNumbers("boug", { start: 8, end: 11 }),
-        frameRate: 4,
-        repeat: -1
-      });
-    
-     this.anims.create({
-        key: "move_right",
-        frames: this.anims.generateFrameNumbers("boug", { start: 12, end: 15 }),
-        frameRate: 4,
-        repeat: -1
-      });
     // on load le tiled
     const carteDuNiveau = this.add.tilemap("cuisine");
     // on load l'image liée au tiled

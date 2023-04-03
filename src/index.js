@@ -1,4 +1,4 @@
-//import menu from "/src/levels/menuPrincipal.js";
+import menu from "/src/levels/menuPrincipal.js";
 //import global from "/src/levels/global.js";
 import kitchen from "/src/levels/kitchen.js";
 import quarters from "/src/levels/quarters.js";
@@ -17,14 +17,9 @@ var config = {
         debug: true // permet de voir les hitbox et les vecteurs d'acceleration quand mis à true
       }
     },
-    scene: [kitchen, quarters]
+    scene: [menu, kitchen, quarters]
   };
   
   // création et lancement du jeu
   var game = new Phaser.Game(config);
-  game.scene.start("quarters");
-
-  function goCuisine() {
-    console.log("a")
-    this.scene.scene.start("kitchen");
-  }
+  game.scene.start("menu");
