@@ -10,14 +10,14 @@ export default class quarters extends Phaser.Scene {
     preload() {
 
       // chargement de la carte
-      this.load.tilemapTiledJSON("quartiers", "src/assets/cuisine.json")
+      this.load.tilemapTiledJSON("quartiers", "src/assets/quartiers.json")
   
       
         }
 
     create(){
         // on load le tiled
-        const carteDuNiveau = this.add.tilemap("cuisine");
+        const carteDuNiveau = this.add.tilemap("quartiers");
         // on load l'image liée au tiled
         const tileset = carteDuNiveau.addTilesetImage(
         "Sprite-0001",
@@ -25,8 +25,8 @@ export default class quarters extends Phaser.Scene {
     );
 
         // création du background a partir du tiles
-    const carteCuisine = carteDuNiveau.createLayer(
-        "map",
+    const carteQuartiers = carteDuNiveau.createLayer(
+        "visuel",
         tileset
     );
 
@@ -50,7 +50,7 @@ export default class quarters extends Phaser.Scene {
     }
 
     update(){
-
+        this.player.update();
     
     
     }

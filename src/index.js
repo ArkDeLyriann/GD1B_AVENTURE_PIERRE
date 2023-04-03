@@ -17,7 +17,7 @@ var config = {
         debug: true // permet de voir les hitbox et les vecteurs d'acceleration quand mis à true
       }
     },
-    scene: [kitchen]
+    scene: [kitchen, quarters]
   };
   
   // création et lancement du jeu
