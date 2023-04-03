@@ -1,4 +1,6 @@
 import Player from "../entities/hero.js";
+import kitchen from "/src/levels/kitchen.js";
+//import index from "/src/index.js"
 
 export default class quarters extends Phaser.Scene {
     // constructeur de la classe
@@ -23,7 +25,8 @@ export default class quarters extends Phaser.Scene {
         "Sprite-0001",
         "Phaser_sprite001"
     );
-
+    
+    
         // création du background a partir du tiles
     const carteQuartiers = carteDuNiveau.createLayer(
         "visuel",
@@ -36,16 +39,29 @@ export default class quarters extends Phaser.Scene {
         tileset
     );
 
+   const carteTpSuite = carteDuNiveau.createLayer(
+        "TP suite",
+        tileset
+    );
+
+    const carteTpAvant = carteDuNiveau.createLayer(
+        "TP avant",
+        tileset
+    );
+    
+    
+
     this.player = new Player(this, 550, 1888, 'boug');
     this.player.refreshBody();
     this.physics.add.collider(this.player, carteCollision);
+    this.physics.add.collider(this.player, carteTpSuite, this.goCuisine);
     carteCollision.setCollisionByExclusion(-1, true);
     this.physics.world.setBounds(0, 0, 1920, 1920);
     
     this.cameras.main.setBounds(0, 0, 1920, 1920);
     this.cameras.main.setZoom(1.5);
     this.cameras.main.startFollow(this.player);
-
+    
 
     }
 
@@ -54,6 +70,8 @@ export default class quarters extends Phaser.Scene {
     
     
     }
+   
+    
 
 
 }

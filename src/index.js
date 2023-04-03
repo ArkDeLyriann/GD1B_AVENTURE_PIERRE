@@ -23,3 +23,8 @@ var config = {
   // création et lancement du jeu
   var game = new Phaser.Game(config);
   game.scene.start("quarters");
+
+  function goCuisine() {
+    console.log("a")
+    this.scene.scene.start("kitchen");
+  }
