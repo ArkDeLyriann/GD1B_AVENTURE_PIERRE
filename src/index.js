@@ -1,7 +1,7 @@
 //import menu from "/src/levels/menuPrincipal.js";
 //import global from "/src/levels/global.js";
 import kitchen from "/src/levels/kitchen.js";
-//import quarters from "/src/levels/quarters.js";
+import quarters from "/src/levels/quarters.js";
 //import chapel from "/src/levels/chapel.js";
 
 
@@ -22,4 +22,4 @@ var config = {
   
   // création et lancement du jeu
   var game = new Phaser.Game(config);
-  game.scene.start("kitchen");
+  game.scene.start("quarters");
