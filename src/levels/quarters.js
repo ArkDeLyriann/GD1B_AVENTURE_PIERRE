@@ -1,6 +1,7 @@
 import Player from "../entities/hero.js";
 import kitchen from "/src/levels/kitchen.js";
 import menu from "/src/levels/menuPrincipal.js";
+import global from "/src/levels/global.js";
 
 export default class quarters extends Phaser.Scene {
     // constructeur de la classe
@@ -14,6 +15,7 @@ export default class quarters extends Phaser.Scene {
     }
 
     create(){
+        this.clavier = this.input.keyboard.createCursorKeys();
         // on load le tiled
         const carteDuNiveau = this.add.tilemap("quartiers");
         // on load l'image liée au tiled
@@ -51,7 +53,9 @@ export default class quarters extends Phaser.Scene {
     this.player.refreshBody();
     this.physics.add.collider(this.player, carteCollision);
     carteTpSuite.setCollisionByExclusion(-1, true);
-    this.physics.add.overlap(this.player, carteTpSuite, this.goCuisine, null , this);
+    this.physics.add.collider(this.player, carteTpSuite, this.goCuisine, null , this);
+    carteTpAvant.setCollisionByExclusion(-1, true);
+    this.physics.add.collider(this.player, carteTpAvant, this.goOutside, null , this);
     carteCollision.setCollisionByExclusion(-1, true);
     this.physics.world.setBounds(0, 0, 1920, 1920);
 
@@ -64,12 +68,24 @@ export default class quarters extends Phaser.Scene {
     }
 
     update(){
+
+
         this.player.update();
     
     
     }
    
-    
+    goCuisine(){
+        
+        this.scene.start("kitchen")
+
+    }
+
+    goOutside(){
+        
+        this.scene.start("global")
+
+    }
 
 
 }

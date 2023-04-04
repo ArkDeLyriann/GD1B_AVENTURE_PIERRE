@@ -12,9 +12,9 @@ export default class menuPrincipal extends Phaser.Scene {
       this.load.image("menu", "src/assets/menu.jpg");
       // chargement de la carte
       this.load.tilemapTiledJSON("cuisine", "src/assets/cuisine.json");
-        // chargement de la carte
-        this.load.tilemapTiledJSON("quartiers", "src/assets/quartiers.json")
-  
+      // chargement de la carte
+      this.load.tilemapTiledJSON("quartiers", "src/assets/quartiers.json");
+      this.load.tilemapTiledJSON("global", "src/assets/global.json");
       this.load.spritesheet("boug", "src/assets/spriteSheetBoug.png", {
           frameWidth: 32,
           frameHeight: 64
@@ -61,14 +61,11 @@ export default class menuPrincipal extends Phaser.Scene {
 
     update(){
         if (this.clavier.space.isDown) {
+            this.scene.stop()
             this.game.scene.start("quarters");
 
         }
     }
 
-    goCuisine(player, trigger){
-        this.scene.start("kitchen",{
-            
-        });
-    }
+
 }

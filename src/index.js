@@ -1,5 +1,5 @@
 import menu from "/src/levels/menuPrincipal.js";
-//import global from "/src/levels/global.js";
+import global from "/src/levels/global.js";
 import kitchen from "/src/levels/kitchen.js";
 import quarters from "/src/levels/quarters.js";
 //import chapel from "/src/levels/chapel.js";
@@ -17,7 +17,7 @@ var config = {
         debug: true // permet de voir les hitbox et les vecteurs d'acceleration quand mis à true
       }
     },
-    scene: [menu, kitchen, quarters]
+    scene: [menu, global, kitchen, quarters]
   };
   
   // création et lancement du jeu
