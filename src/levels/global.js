@@ -43,10 +43,12 @@ export default class global extends Phaser.Scene {
         this.player.refreshBody();
         this.physics.add.collider(this.player, carteCollider);
         carteCollider.setCollisionByExclusion(-1, true);
+
+        this.player.setScale(0.5);
         
         this.physics.world.setBounds(0, 0, 1920, 1920);
         this.cameras.main.setBounds(0, 0, 1920, 1920);
-        //this.cameras.main.setZoom(1.5);
+        this.cameras.main.setZoom(1.5);
         this.cameras.main.startFollow(this.player);
 
 
