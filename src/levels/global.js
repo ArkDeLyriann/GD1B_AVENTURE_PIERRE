@@ -32,9 +32,14 @@ export default class global extends Phaser.Scene {
         tileset
         );
 
+        const carteHaies = carteDuNiveau.createLayer(
+          "haies",
+          tileset
+          );
+
         // les plateformes sont solides
          const carteCollider = carteDuNiveau.createLayer(
-        "collide",
+        "mursMaisons",
         tileset
         );
 
@@ -44,7 +49,7 @@ export default class global extends Phaser.Scene {
         this.physics.add.collider(this.player, carteCollider);
         carteCollider.setCollisionByExclusion(-1, true);
 
-        this.player.setScale(0.5);
+        this.player.setScale(1);
         
         this.physics.world.setBounds(0, 0, 1920, 1920);
         this.cameras.main.setBounds(0, 0, 1920, 1920);
