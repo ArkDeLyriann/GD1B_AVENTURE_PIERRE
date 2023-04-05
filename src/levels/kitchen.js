@@ -25,13 +25,13 @@ export default class kitchen extends Phaser.Scene {
 
     // création du background a partir du tiles
     const carteCuisine = carteDuNiveau.createLayer(
-        "map",
+        "fond",
         tileset
         );
 
     // les plateformes sont solides
     const carteMurs = carteDuNiveau.createLayer(
-        "murs",
+        "collision",
         tileset
         );
 
