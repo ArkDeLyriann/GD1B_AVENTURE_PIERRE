@@ -47,6 +47,8 @@ export default class kitchen extends Phaser.Scene {
     this.physics.add.collider(this.player, carteMurs);
     carteMurs.setCollisionByExclusion(-1, true);
     this.physics.world.setBounds(0, 0, 1920, 1920);
+
+    this.barrePV = this.add.sprite(275 , 150, 'healthBar',0).setScrollFactor(0, 0);
     //this.player.setScale(1.5);
     //this.player.setSize(20,40);
     //this.player.setOffset(0,24);

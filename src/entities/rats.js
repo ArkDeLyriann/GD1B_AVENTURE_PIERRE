@@ -16,7 +16,18 @@ export default class Rat extends Phaser.Physics.Arcade.Sprite{
     }
 
     update(){
-        
+        if (this.velocity.x > 0) {
+            this.anims.play("rat_right", true);
+        }
+        if (this.velocity.x < 0) {
+            this.anims.play("rat_left", true);
+        }
+        if (this.velocity.y > 0) {
+            this.anims.play("rat_Up", true);
+        }
+        if (this.velocity.y < 0) {
+            this.anims.play("rat_Down", true);
+        }
     }
 
 

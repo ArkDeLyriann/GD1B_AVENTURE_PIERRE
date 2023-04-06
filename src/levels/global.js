@@ -18,10 +18,17 @@ export default class global extends Phaser.Scene {
 
     preload(){
         this.load.image("Phaser_sprite001", "src/assets/Sprite-0001.png");
+        this.load.spritesheet("healthBar", "src/assets/lifebar.png",{
+        frameWidth: 128,
+        frameHeight: 32,
+
+      })
     }
 
     create(){
-        this.clavier = this.input.keyboard.createCursorKeys();
+
+        this.playerHP = 5
+        this.claPVr = this.input.keyboard.createCursorKeys();
         // on load le tiled
         const carteDuNiveau = this.add.tilemap("global");
         // on load l'image liée au tiled
@@ -64,6 +71,8 @@ export default class global extends Phaser.Scene {
         else{this.player = new Player(this, 1216, 2208, 'boug');
         }
         
+        
+
         this.ratus = this.add.group();
 
         this.miniBoss = new miniBoss(this, 25*32, 13*32, 'boss1');
@@ -74,13 +83,16 @@ export default class global extends Phaser.Scene {
         this.ratus.add(new Rat(this, 1200, 2000, 'rats'));
         //this.ratus.add(new Rat(this, 1200, 2000, 'rats'));
         //this.ratus.add(new Rat(this, 1200, 2000, 'rats'));
-        
+
+
+        this.barrePV = this.add.sprite(275 , 150, 'healthBar',0).setScrollFactor(0, 0);
         this.player.refreshBody();
         this.physics.add.collider(this.player, carteCollider);
         carteCollider.setCollisionByExclusion(-1, true);
         this.physics.add.collider(this.player, carteHaies);
         carteHaies.setCollisionByExclusion(-1, true);
         this.player.setScale(1);
+        this.physics.add.collider(this.player, this.ratus, this.toucheRatus, null, this);
         
         this.physics.add.collider(this.ratus, carteCollider);
         this.physics.add.collider(this.ratus, carteHaies);
@@ -117,15 +129,20 @@ export default class global extends Phaser.Scene {
             switch(randNumber) {
               case 1:
                 rat.body.setVelocityX(50);
+                //this.anims.play("rat_right", true);
                 break;
               case 2:
                 rat.body.setVelocityX(-50);
+                //this.anims.play("rat_left", true);
                 break;
               case 3:
                 rat.body.setVelocityY(-50);
+                //this.anims.play("rat_Up", true);
                 break;
               case 4:
                 rat.body.setVelocityY(50);
+                //this.anims.play("rat_Down", true);
+                
                 break;
               
             }
@@ -144,10 +161,43 @@ export default class global extends Phaser.Scene {
         this.bossLight.x = this.miniBoss.x;
         this.bossLight.y = this.miniBoss.y;
 
+        if (this.playerHP == 5){
+          //console.log(this.barrePV);
+      //    this.barrePV.anims.play('full');
+        }
+        else if (this.playerHP == 4){
+          this.barrePV.anims.play('1hit');
+        }
+        else if (this.playerHP == 3){
+          this.barrePV.anims.play('2hit');
+        }
+        else if (this.playerHP == 2){
+          this.barrePV.anims.play('3hit');
+        }
+        else if (this.playerHP == 1){
+          this.barrePV.anims.play('4hit');
+        }
+        else if (this.playerHP == 0){
+          this.barrePV.anims.play('ded');
+          return;
+        }
+
         
         
         
         
+
+    }
+
+    toucheRatus(){
+      if (this.player.alpha==1){
+      this.playerHP -= 1;
+      this.player.setAlpha(0.5);
+      setTimeout(() => {
+        this.player.setAlpha(1);
+      }, 3000)
+      }
+      
 
     }
     goCuisine(){

@@ -13,6 +13,8 @@ export default class Player extends Phaser.Physics.Arcade.Sprite{
     
     update(){
 
+        this.healthPoints = 6
+
         var mouvement = new Phaser.Math.Vector2(0, 0);
         // Mouvement
         if (this.clavier.left.isDown) {

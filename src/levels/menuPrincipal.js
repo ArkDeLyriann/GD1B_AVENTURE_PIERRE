@@ -9,7 +9,7 @@ export default class menuPrincipal extends Phaser.Scene {
     }
     preload() {
 
-      this.load.spritesheet("healthBar", "src/assets/libear.png",{
+      this.load.spritesheet("healthBar", "src/assets/lifebar.png",{
         frameWidth: 128,
         frameHeight: 32,
 
@@ -20,8 +20,8 @@ export default class menuPrincipal extends Phaser.Scene {
         frameHeight: 96
       });
       this.load.spritesheet("rats", "src/assets/rats.png", {
-        frameWidth: 64,
-        frameHeight: 64
+        frameWidth: 71,
+        frameHeight: 58
       });
       this.load.image("menu", "src/assets/menu.jpg");
       // chargement de la carte
@@ -42,42 +42,39 @@ export default class menuPrincipal extends Phaser.Scene {
         this.add.image(1200, 720, 'menu');
 
         this.anims.create({
-          key: "fullHP",
-          frames: this.anims.generateFrameNumbers("healtBar", { start: 0, end: 0 }),
-          frameRate: 4,
-          repeat: -1
+          key: "full",
+          frames: [{ key: "healthBar", frame: 0 }],
+          frameRate: 20
         });
+        // 1 pv perdu
         this.anims.create({
-          key: "1hpPerdu",
-          frames: this.anims.generateFrameNumbers("healthBar", { start: 1, end: 1 }),
-          frameRate: 4,
-          repeat: -1
+          key: "1hit",
+          frames: [{ key: "healthBar", frame: 1 }],
+          frameRate: 20
         });
+        // 2 pv perdus
         this.anims.create({
-          key: "2hpPerdus",
-          frames: this.anims.generateFrameNumbers("healthBar", { start: 2, end: 2 }),
-          frameRate: 4,
-          repeat: -1
+          key: "2hit",
+          frames: [{ key: "healthBar", frame: 2 }],
+          frameRate: 20
         });
+        // 3 pv perdus
         this.anims.create({
-          key: "3hpPerdus",
-          frames: this.anims.generateFrameNumbers("healthBar", { start: 3, end: 3 }),
-          frameRate: 4,
-          repeat: -1
+          key: "3hit",
+          frames: [{ key: "healthBar", frame: 3 }],
+          frameRate: 20
         });
+        // 4 pv perdus
         this.anims.create({
-          key: "4hpPerdus",
-          frames: this.anims.generateFrameNumbers("healthBar", { start: 4, end: 4 }),
-          frameRate: 4,
-          repeat: -1
+          key: "4hit",
+          frames: [{ key: "healthBar", frame: 4 }],
+          frameRate: 20
         });
         this.anims.create({
           key: "ded",
-          frames: this.anims.generateFrameNumbers("healthBar", { start: 5, end: 5 }),
-          frameRate: 4,
-          repeat: -1
+          frames: [{ key: "healthBar", frame: 5 }],
+          frameRate: 20
         });
-
 
 
         this.anims.create({
