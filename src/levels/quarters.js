@@ -63,6 +63,17 @@ export default class quarters extends Phaser.Scene {
     this.cameras.main.setBounds(0, 0, 1920, 1920);
     this.cameras.main.setZoom(1.5);
     this.cameras.main.startFollow(this.player);
+
+    carteQuartiers.setPipeline('Light2D');
+    carteCollision.setPipeline('Light2D');
+    carteTpAvant.setPipeline('Light2D');
+    carteTpSuite.setPipeline('Light2D');
+    this.player.setPipeline('Light2D');
+    
+    
+    this.lights.enable().setAmbientColor(0x333333);
+
+    this.light = this.lights.addLight(180, 80, 800).setColor(0xf1af0c).setIntensity(1.3);
     
 
     }
@@ -71,6 +82,9 @@ export default class quarters extends Phaser.Scene {
 
 
         this.player.update();
+
+        this.light.x = this.player.x;
+        this.light.y = this.player.y;
     
     
     }
