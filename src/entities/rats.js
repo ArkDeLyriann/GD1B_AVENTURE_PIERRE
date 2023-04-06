@@ -9,8 +9,22 @@ export default class Rat extends Phaser.Physics.Arcade.Sprite{
         this.setCollideWorldBounds(true);
     }
 
+    create(){
+        this.body.setSize(24, 32);
 
+        
+    }
 
+    update(){
+        setScale()
+        var mouvement = new Phaser.Math.Vector2(0, 0);
+        // Mouvement
+        
+    
+    
+    
+    
+    }
 
 
 }

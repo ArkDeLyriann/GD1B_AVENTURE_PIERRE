@@ -1,6 +1,7 @@
 import Player from "../entities/hero.js";
 import kitchen from "/src/levels/kitchen.js";
 import menu from "/src/levels/menuPrincipal.js";
+import Rat from "/src/entities/rats.js";
 
 export default class global extends Phaser.Scene {
     // constructeur de la classe
@@ -61,6 +62,8 @@ export default class global extends Phaser.Scene {
         }
         else{this.player = new Player(this, 1216, 2208, 'boug');
         }
+        
+
         
         this.player.refreshBody();
         this.physics.add.collider(this.player, carteCollider);

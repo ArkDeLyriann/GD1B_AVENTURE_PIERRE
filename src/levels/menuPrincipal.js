@@ -9,6 +9,10 @@ export default class menuPrincipal extends Phaser.Scene {
     }
     preload() {
       this.load.image("Phaser_sprite001", "src/assets/Sprite-0001.png");
+      this.load.spritesheet("rats", "src/assets/rats.png", {
+        frameWidth: 64,
+        frameHeight: 64
+      });
       this.load.image("menu", "src/assets/menu.jpg");
       // chargement de la carte
       this.load.tilemapTiledJSON("cuisine", "src/assets/cuisine.json");
@@ -51,6 +55,35 @@ export default class menuPrincipal extends Phaser.Scene {
          this.anims.create({
             key: "move_right",
             frames: this.anims.generateFrameNumbers("boug", { start: 12, end: 15 }),
+            frameRate: 4,
+            repeat: -1
+          });
+
+        
+          this.anims.create({
+            key: "rat_Up",
+            frames: this.anims.generateFrameNumbers("rats", { start: 0, end: 3 }),
+            frameRate: 4,
+            repeat: -1
+          });
+        
+        this.anims.create({
+            key: "rat_Down",
+            frames: this.anims.generateFrameNumbers("rats", { start: 4, end: 7 }),
+            frameRate: 4,
+            repeat: -1
+          });
+    
+        this.anims.create({
+            key: "rat_left",
+            frames: this.anims.generateFrameNumbers("rats", { start: 8, end: 11 }),
+            frameRate: 4,
+            repeat: -1
+          });
+        
+         this.anims.create({
+            key: "rat_right",
+            frames: this.anims.generateFrameNumbers("rats", { start: 12, end: 15 }),
             frameRate: 4,
             repeat: -1
           });
