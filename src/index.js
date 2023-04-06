@@ -7,7 +7,7 @@ import quarters from "/src/levels/quarters.js";
 
 
 var config = {
-    type: Phaser.AUTO,
+    type: Phaser.CANVAS,
     width: GAME_WIDTH, // largeur en pixels
     height: GAME_HEIGHT, // hauteur en pixels
     physics: {
@@ -17,7 +17,7 @@ var config = {
         debug: true // permet de voir les hitbox et les vecteurs d'acceleration quand mis à true
       }
     },
-    PixelArt : true,
+    antialias: false,
 
     scene: [menu, global, kitchen, quarters]
   };

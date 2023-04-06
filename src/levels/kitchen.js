@@ -34,6 +34,10 @@ export default class kitchen extends Phaser.Scene {
         "collision",
         tileset
         );
+    const carteSortie = carteDuNiveau.createLayer(
+      "sortie",
+      tileset
+      );
 
     
   
@@ -47,6 +51,9 @@ export default class kitchen extends Phaser.Scene {
     //this.player.setSize(20,40);
     //this.player.setOffset(0,24);
 
+    carteSortie.setCollisionByExclusion(-1, true);
+    this.physics.add.collider(this.player, carteSortie, this.goOutside, null , this);
+
     this.cameras.main.setBounds(0, 0, 1920, 1920);
     this.cameras.main.setZoom(1.5);
     this.cameras.main.startFollow(this.player);
@@ -55,6 +62,15 @@ export default class kitchen extends Phaser.Scene {
   update(){
     this.player.update();
 
+
+  }
+
+  goOutside(){
+        
+    this.scene.start("global", {
+      x:17*32, 
+      y:22*32
+    });
 
   }
   

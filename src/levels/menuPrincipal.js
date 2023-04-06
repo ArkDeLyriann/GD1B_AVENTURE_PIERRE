@@ -61,8 +61,8 @@ export default class menuPrincipal extends Phaser.Scene {
 
     update(){
         if (this.clavier.space.isDown) {
-            this.scene.stop()
-            this.game.scene.start("quarters");
+            this.scene.stop();
+            this.game.scene.start("global");
 
         }
     }

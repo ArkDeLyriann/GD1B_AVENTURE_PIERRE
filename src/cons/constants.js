@@ -1,3 +1,3 @@
 const GAME_WIDTH = 1200;
 const GAME_HEIGHT = 720;
-const PLAYER_SPEED = 200;
+const PLAYER_SPEED = 300;

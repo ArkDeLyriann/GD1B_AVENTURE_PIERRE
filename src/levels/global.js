@@ -9,7 +9,10 @@ export default class global extends Phaser.Scene {
         key: "global" //  ici on précise le nom de la classe en tant qu'identifiant
       });
     }
-
+    init(data){
+      this.spawnX = data.x
+      this.spawnY = data.y
+    }
 
     preload(){
         this.load.image("Phaser_sprite001", "src/assets/Sprite-0001.png");
@@ -28,8 +31,8 @@ export default class global extends Phaser.Scene {
     
         // création du background a partir du tiles
         const carteGlobal = carteDuNiveau.createLayer(
-        "fond",
-        tileset
+          "fond",
+          tileset
         );
 
         const carteHaies = carteDuNiveau.createLayer(
@@ -39,16 +42,31 @@ export default class global extends Phaser.Scene {
 
         // les plateformes sont solides
          const carteCollider = carteDuNiveau.createLayer(
-        "mursMaisons",
-        tileset
+          "mursMaisons",
+          tileset
         );
 
+        const carteVersCuisine = carteDuNiveau.createLayer(
+          "tpCuisine",
+          tileset
+        );
 
-        this.player = new Player(this, 1216, 2208, 'boug');
+        const carteVersQuarters = carteDuNiveau.createLayer(
+          "tpQuarters",
+          tileset
+        );
+
+        if(this.spawnX && this.spawnY){
+          this.player = new Player(this, this.spawnX, this.spawnY, 'boug');
+        }
+        else{this.player = new Player(this, 1216, 2208, 'boug');
+        }
+        
         this.player.refreshBody();
         this.physics.add.collider(this.player, carteCollider);
         carteCollider.setCollisionByExclusion(-1, true);
-
+        this.physics.add.collider(this.player, carteHaies);
+        carteHaies.setCollisionByExclusion(-1, true);
         this.player.setScale(1);
         
         this.physics.world.setBounds(0, 0, 1920, 1920);
@@ -56,12 +74,20 @@ export default class global extends Phaser.Scene {
         this.cameras.main.setZoom(1.5);
         this.cameras.main.startFollow(this.player);
 
+        carteVersCuisine.setCollisionByExclusion(-1, true);
+        this.physics.add.collider(this.player, carteVersCuisine, this.goCuisine, null , this);
+
 
     }
 
     update(){
 
         this.player.update();
+
+    }
+    goCuisine(){
+        
+      this.scene.start("kitchen")
 
     }
 }
