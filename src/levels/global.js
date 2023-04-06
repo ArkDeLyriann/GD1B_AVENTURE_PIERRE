@@ -85,7 +85,9 @@ export default class global extends Phaser.Scene {
         //this.ratus.add(new Rat(this, 1200, 2000, 'rats'));
 
 
-        this.barrePV = this.add.sprite(275 , 150, 'healthBar',0).setScrollFactor(0, 0);
+        this.barrePV = this.add.sprite(300 , 150, 'healthBar',0).setScrollFactor(0, 0);
+        this.barrePV.setScale(1.5);
+
         this.player.refreshBody();
         this.physics.add.collider(this.player, carteCollider);
         carteCollider.setCollisionByExclusion(-1, true);

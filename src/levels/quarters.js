@@ -59,7 +59,8 @@ export default class quarters extends Phaser.Scene {
     carteCollision.setCollisionByExclusion(-1, true);
     this.physics.world.setBounds(0, 0, 1920, 1920);
 
-    this.barrePV = this.add.sprite(275 , 150, 'healthBar',0).setScrollFactor(0, 0);
+    this.barrePV = this.add.sprite(300 , 150, 'healthBar',0).setScrollFactor(0, 0);
+    this.barrePV.setScale(1.5);
 
 
     this.cameras.main.setBounds(0, 0, 1920, 1920);
