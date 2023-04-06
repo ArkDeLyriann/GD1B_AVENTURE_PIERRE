@@ -98,6 +98,8 @@ export default class global extends Phaser.Scene {
         
         this.physics.add.collider(this.ratus, carteCollider);
         this.physics.add.collider(this.ratus, carteHaies);
+        this.physics.add.collider(this.miniBoss, carteCollider);
+        this.physics.add.collider(this.miniBoss, carteHaies);
 
         this.physics.world.setBounds(0, 0, 1920, 1920);
         this.cameras.main.setBounds(0, 0, 1920, 1920);
@@ -150,6 +152,30 @@ export default class global extends Phaser.Scene {
             }
           });
         }, 1000);
+
+        this.intervalBoss = setInterval(() => {
+          const randNumber = Math.floor((Math.random() * 4) + 1);
+            switch(randNumber) {
+              case 1:
+                this.miniBoss.setVelocityX(150);
+                //this.anims.play("rat_right", true);
+                break;
+              case 2:
+                this.miniBoss.setVelocityX(-150);
+                //this.anims.play("rat_left", true);
+                break;
+              case 3:
+                this.miniBoss.setVelocityY(-150);
+                //this.anims.play("rat_Up", true);
+                break;
+              case 4:
+                this.miniBoss.setVelocityY(150);
+                //this.anims.play("rat_Down", true);
+                
+                break;
+              
+            }
+          }, 200);
 
         
     }
