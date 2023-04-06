@@ -2,6 +2,7 @@ import Player from "../entities/hero.js";
 import kitchen from "/src/levels/kitchen.js";
 import menu from "/src/levels/menuPrincipal.js";
 import Rat from "/src/entities/rats.js";
+import miniBoss from "/src/entities/miniBoss.js";
 
 export default class global extends Phaser.Scene {
     // constructeur de la classe
@@ -63,7 +64,16 @@ export default class global extends Phaser.Scene {
         else{this.player = new Player(this, 1216, 2208, 'boug');
         }
         
+        this.ratus = this.add.group();
 
+        this.miniBoss = new miniBoss(this, 25*32, 13*32, 'boss1');
+
+        this.ratus.add(new Rat(this, 19*32, 39*32, 'rats'));
+        this.ratus.add(new Rat(this, 30*32, 35*32, 'rats'));
+        this.ratus.add(new Rat(this, 50*32, 40*32, 'rats'));
+        this.ratus.add(new Rat(this, 1200, 2000, 'rats'));
+        //this.ratus.add(new Rat(this, 1200, 2000, 'rats'));
+        //this.ratus.add(new Rat(this, 1200, 2000, 'rats'));
         
         this.player.refreshBody();
         this.physics.add.collider(this.player, carteCollider);
@@ -72,6 +82,9 @@ export default class global extends Phaser.Scene {
         carteHaies.setCollisionByExclusion(-1, true);
         this.player.setScale(1);
         
+        this.physics.add.collider(this.ratus, carteCollider);
+        this.physics.add.collider(this.ratus, carteHaies);
+
         this.physics.world.setBounds(0, 0, 1920, 1920);
         this.cameras.main.setBounds(0, 0, 1920, 1920);
         this.cameras.main.setZoom(1.5);
@@ -88,13 +101,38 @@ export default class global extends Phaser.Scene {
         carteHaies.setPipeline('Light2D');
         carteVersCuisine.setPipeline('Light2D');
         carteVersQuarters.setPipeline('Light2D');
-        this.player.setPipeline('Light2D');
-        
-        
+        this.miniBoss.setPipeline('Light2D');
+        this.ratus.getChildren().forEach((rat) => {
+          rat.setPipeline('Light2D');
+        });
         this.lights.enable().setAmbientColor(0x3333ff);
 
         this.light = this.lights.addLight(180, 80, 500).setColor(0xf1af0c).setIntensity(1);
+        this.bossLight = this.lights.addLight(180, 80, 500).setColor(0xc643c4).setIntensity(1);
+        this.miniBoss.setScale(1.5);
 
+        this.intervalMoveRatus = setInterval(() => {
+          this.ratus.getChildren().forEach((rat) => {
+            const randNumber = Math.floor((Math.random() * 4) + 1);
+            switch(randNumber) {
+              case 1:
+                rat.body.setVelocityX(50);
+                break;
+              case 2:
+                rat.body.setVelocityX(-50);
+                break;
+              case 3:
+                rat.body.setVelocityY(-50);
+                break;
+              case 4:
+                rat.body.setVelocityY(50);
+                break;
+              
+            }
+          });
+        }, 1000);
+
+        
     }
 
     update(){
@@ -102,6 +140,14 @@ export default class global extends Phaser.Scene {
         this.player.update();
         this.light.x = this.player.x;
         this.light.y = this.player.y;
+
+        this.bossLight.x = this.miniBoss.x;
+        this.bossLight.y = this.miniBoss.y;
+
+        
+        
+        
+        
 
     }
     goCuisine(){

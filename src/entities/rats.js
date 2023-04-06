@@ -1,8 +1,9 @@
+import Player from "../entities/hero.js";
+
 export default class Rat extends Phaser.Physics.Arcade.Sprite{
     constructor(scene, x, y, texture){
         super(scene, x, y, texture)
-        this.clavier = scene.input.keyboard.createCursorKeys();
-        
+        this.setScale(0.75);
 
         scene.physics.world.enable(this)
         scene.add.existing(this)
@@ -10,20 +11,12 @@ export default class Rat extends Phaser.Physics.Arcade.Sprite{
     }
 
     create(){
-        this.body.setSize(24, 32);
 
-        
+
     }
 
     update(){
-        setScale()
-        var mouvement = new Phaser.Math.Vector2(0, 0);
-        // Mouvement
         
-    
-    
-    
-    
     }
 
 

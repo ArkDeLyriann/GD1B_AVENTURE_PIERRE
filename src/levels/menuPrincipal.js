@@ -8,7 +8,17 @@ export default class menuPrincipal extends Phaser.Scene {
       });
     }
     preload() {
+
+      this.load.spritesheet("healthBar", "src/assets/libear.png",{
+        frameWidth: 128,
+        frameHeight: 32,
+
+      })
       this.load.image("Phaser_sprite001", "src/assets/Sprite-0001.png");
+      this.load.spritesheet("boss1", "src/assets/boss_1.png", {
+        frameWidth: 64,
+        frameHeight: 96
+      });
       this.load.spritesheet("rats", "src/assets/rats.png", {
         frameWidth: 64,
         frameHeight: 64
@@ -30,6 +40,45 @@ export default class menuPrincipal extends Phaser.Scene {
     create() {
 
         this.add.image(1200, 720, 'menu');
+
+        this.anims.create({
+          key: "fullHP",
+          frames: this.anims.generateFrameNumbers("healtBar", { start: 0, end: 0 }),
+          frameRate: 4,
+          repeat: -1
+        });
+        this.anims.create({
+          key: "1hpPerdu",
+          frames: this.anims.generateFrameNumbers("healthBar", { start: 1, end: 1 }),
+          frameRate: 4,
+          repeat: -1
+        });
+        this.anims.create({
+          key: "2hpPerdus",
+          frames: this.anims.generateFrameNumbers("healthBar", { start: 2, end: 2 }),
+          frameRate: 4,
+          repeat: -1
+        });
+        this.anims.create({
+          key: "3hpPerdus",
+          frames: this.anims.generateFrameNumbers("healthBar", { start: 3, end: 3 }),
+          frameRate: 4,
+          repeat: -1
+        });
+        this.anims.create({
+          key: "4hpPerdus",
+          frames: this.anims.generateFrameNumbers("healthBar", { start: 4, end: 4 }),
+          frameRate: 4,
+          repeat: -1
+        });
+        this.anims.create({
+          key: "ded",
+          frames: this.anims.generateFrameNumbers("healthBar", { start: 5, end: 5 }),
+          frameRate: 4,
+          repeat: -1
+        });
+
+
 
         this.anims.create({
             key: "iddle_left",
