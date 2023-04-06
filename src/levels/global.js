@@ -78,13 +78,27 @@ export default class global extends Phaser.Scene {
         this.physics.add.collider(this.player, carteVersCuisine, this.goCuisine, null , this);
         carteVersQuarters.setCollisionByExclusion(-1, true);
         this.physics.add.collider(this.player, carteVersQuarters, this.goQuarters, null , this);
+        
+        
+        carteCollider.setPipeline('Light2D');
+        carteGlobal.setPipeline('Light2D');
+        carteHaies.setPipeline('Light2D');
+        carteVersCuisine.setPipeline('Light2D');
+        carteVersQuarters.setPipeline('Light2D');
+        this.player.setPipeline('Light2D');
+        
+        
+        this.lights.enable().setAmbientColor(0x3333ff);
 
+        this.light = this.lights.addLight(180, 80, 500).setColor(0xf1af0c).setIntensity(1);
 
     }
 
     update(){
 
         this.player.update();
+        this.light.x = this.player.x;
+        this.light.y = this.player.y;
 
     }
     goCuisine(){

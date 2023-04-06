@@ -57,11 +57,22 @@ export default class kitchen extends Phaser.Scene {
     this.cameras.main.setBounds(0, 0, 1920, 1920);
     this.cameras.main.setZoom(1.5);
     this.cameras.main.startFollow(this.player);
+
+    carteCuisine.setPipeline('Light2D');
+    carteMurs.setPipeline('Light2D');
+    carteSortie.setPipeline('Light2D');
+    this.player.setPipeline('Light2D');
+    
+    
+    this.lights.enable().setAmbientColor(0x333333);
+
+    this.light = this.lights.addLight(180, 80, 800).setColor(0xf1af0c).setIntensity(1.3);
 }
 
   update(){
     this.player.update();
-
+    this.light.x = this.player.x;
+    this.light.y = this.player.y;
 
   }
 

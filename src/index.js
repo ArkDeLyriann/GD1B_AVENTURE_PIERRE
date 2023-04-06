@@ -7,7 +7,7 @@ import quarters from "/src/levels/quarters.js";
 
 
 var config = {
-    type: Phaser.CANVAS,
+    type: Phaser.AUTO,
     width: GAME_WIDTH, // largeur en pixels
     height: GAME_HEIGHT, // hauteur en pixels
     physics: {
