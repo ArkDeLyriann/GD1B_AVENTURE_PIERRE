@@ -76,6 +76,8 @@ export default class global extends Phaser.Scene {
 
         carteVersCuisine.setCollisionByExclusion(-1, true);
         this.physics.add.collider(this.player, carteVersCuisine, this.goCuisine, null , this);
+        carteVersQuarters.setCollisionByExclusion(-1, true);
+        this.physics.add.collider(this.player, carteVersQuarters, this.goQuarters, null , this);
 
 
     }
@@ -88,6 +90,12 @@ export default class global extends Phaser.Scene {
     goCuisine(){
         
       this.scene.start("kitchen")
+
+    }
+
+    goQuarters(){
+        
+      this.scene.start("quarters")
 
     }
 }

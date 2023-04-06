@@ -53,9 +53,9 @@ export default class quarters extends Phaser.Scene {
     this.player.refreshBody();
     this.physics.add.collider(this.player, carteCollision);
     carteTpSuite.setCollisionByExclusion(-1, true);
-    this.physics.add.collider(this.player, carteTpSuite, this.goCuisine, null , this);
+    this.physics.add.collider(this.player, carteTpSuite, this.goSuite, null , this);
     carteTpAvant.setCollisionByExclusion(-1, true);
-    this.physics.add.collider(this.player, carteTpAvant, this.goOutside, null , this);
+    this.physics.add.collider(this.player, carteTpAvant, this.goBack, null , this);
     carteCollision.setCollisionByExclusion(-1, true);
     this.physics.world.setBounds(0, 0, 1920, 1920);
 
@@ -75,15 +75,21 @@ export default class quarters extends Phaser.Scene {
     
     }
    
-    goCuisine(){
+    goSuite(){
         
-        this.scene.start("kitchen")
+        this.scene.start("global",{
+            x:48*32, 
+            y:8*32
+          });
 
     }
 
-    goOutside(){
+    goBack(){
         
-        this.scene.start("global")
+        this.scene.start("global",{
+            x:51*32, 
+            y:20*32
+          });
 
     }
 
