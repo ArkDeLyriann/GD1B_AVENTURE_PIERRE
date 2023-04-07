@@ -14,6 +14,7 @@ export default class global extends Phaser.Scene {
     init(data){
       this.spawnX = data.x
       this.spawnY = data.y
+      this.playerHP = data.playerHP
     }
 
     preload(){
@@ -27,7 +28,6 @@ export default class global extends Phaser.Scene {
 
     create(){
 
-        this.playerHP = 5
         this.claPVr = this.input.keyboard.createCursorKeys();
         // on load le tiled
         const carteDuNiveau = this.add.tilemap("global");
@@ -85,9 +85,8 @@ export default class global extends Phaser.Scene {
         //this.ratus.add(new Rat(this, 1200, 2000, 'rats'));
 
 
-        this.barrePV = this.add.sprite(300 , 150, 'healthBar',0).setScrollFactor(0, 0);
+        this.barrePV = this.add.sprite(300 , 150, 'healthBar').setScrollFactor(0, 0);
         this.barrePV.setScale(1.5);
-        this.barrePV.setAlpha(0.001);
 
         this.player.refreshBody();
         this.physics.add.collider(this.player, carteCollider);
@@ -96,7 +95,6 @@ export default class global extends Phaser.Scene {
         carteHaies.setCollisionByExclusion(-1, true);
         this.player.setScale(1);
         this.physics.add.collider(this.player, this.ratus, this.toucheRatus, null, this);
-        this.player.setAlpha(0);
         
         this.physics.add.collider(this.ratus, carteCollider);
         this.physics.add.collider(this.ratus, carteHaies);
@@ -160,24 +158,19 @@ export default class global extends Phaser.Scene {
             switch(randNumber) {
               case 1:
                 this.miniBoss.setVelocityX(150);
-                //this.anims.play("rat_right", true);
                 break;
               case 2:
                 this.miniBoss.setVelocityX(-150);
-                //this.anims.play("rat_left", true);
                 break;
               case 3:
                 this.miniBoss.setVelocityY(-150);
-                //this.anims.play("rat_Up", true);
                 break;
               case 4:
                 this.miniBoss.setVelocityY(150);
-                //this.anims.play("rat_Down", true);
-                
                 break;
               
             }
-          }, 200);
+          }, 2000);
 
         
     }
@@ -211,8 +204,6 @@ export default class global extends Phaser.Scene {
           this.barrePV.anims.play('ded');
           return;
         }
-
-        
         
         
         
@@ -222,6 +213,7 @@ export default class global extends Phaser.Scene {
     toucheRatus(){
       if (this.player.alpha==1){
       this.playerHP -= 1;
+      console.log(this.playerHP);
       this.player.setAlpha(0.5);
       setTimeout(() => {
         this.player.setAlpha(1);
@@ -231,14 +223,19 @@ export default class global extends Phaser.Scene {
 
     }
     goCuisine(){
+      this.scene.stop();
         
-      this.scene.start("kitchen")
+      this.scene.start("kitchen",{
+        playerHP : this.playerHP
+      })
 
     }
 
     goQuarters(){
         
-      this.scene.start("quarters")
+      this.scene.start("quarters",{
+        playerHP : this.playerHP
+      })
 
     }
 }

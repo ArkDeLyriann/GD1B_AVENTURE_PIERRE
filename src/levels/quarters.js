@@ -10,6 +10,9 @@ export default class quarters extends Phaser.Scene {
         key: "quarters" //  ici on précise le nom de la classe en tant qu'identifiant
       });
     }
+    init(data){
+        this.playerHP = data.playerHP
+      }
     preload() {
         this.load.image("Phaser_sprite001", "src/assets/Sprite-0001.png");
     }
@@ -59,7 +62,7 @@ export default class quarters extends Phaser.Scene {
     carteCollision.setCollisionByExclusion(-1, true);
     this.physics.world.setBounds(0, 0, 1920, 1920);
 
-    this.barrePV = this.add.sprite(300 , 150, 'healthBar',0).setScrollFactor(0, 0);
+    this.barrePV = this.add.sprite(300 , 150, 'healthBar').setScrollFactor(0, 0);
     this.barrePV.setScale(1.5);
 
 
@@ -88,6 +91,27 @@ export default class quarters extends Phaser.Scene {
 
         this.light.x = this.player.x;
         this.light.y = this.player.y;
+
+        if (this.playerHP == 5){
+            //console.log(this.barrePV);
+        //    this.barrePV.anims.play('full');
+          }
+          else if (this.playerHP == 4){
+            this.barrePV.anims.play('1hit');
+          }
+          else if (this.playerHP == 3){
+            this.barrePV.anims.play('2hit');
+          }
+          else if (this.playerHP == 2){
+            this.barrePV.anims.play('3hit');
+          }
+          else if (this.playerHP == 1){
+            this.barrePV.anims.play('4hit');
+          }
+          else if (this.playerHP == 0){
+            this.barrePV.anims.play('ded');
+            return;
+          }
     
     
     }
@@ -96,7 +120,8 @@ export default class quarters extends Phaser.Scene {
         
         this.scene.start("global",{
             x:48*32, 
-            y:8*32
+            y:8*32,
+            playerHP : this.playerHP,
           });
 
     }
@@ -105,7 +130,8 @@ export default class quarters extends Phaser.Scene {
         
         this.scene.start("global",{
             x:51*32, 
-            y:20*32
+            y:20*32,
+            playerHP : this.playerHP,
           });
 
     }
