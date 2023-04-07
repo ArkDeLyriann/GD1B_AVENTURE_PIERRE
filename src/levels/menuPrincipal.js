@@ -15,6 +15,7 @@ export default class menuPrincipal extends Phaser.Scene {
 
       })
       this.load.image("Phaser_sprite001", "src/assets/Sprite-0001.png");
+      this.load.image('potion', "src/assets/possion.png")
       this.load.spritesheet("boss1", "src/assets/boss_1.png", {
         frameWidth: 64,
         frameHeight: 96

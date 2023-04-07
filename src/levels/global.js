@@ -28,7 +28,9 @@ export default class global extends Phaser.Scene {
 
     create(){
 
-        this.claPVr = this.input.keyboard.createCursorKeys();
+      
+
+        this.clavier = this.input.keyboard.createCursorKeys();
         // on load le tiled
         const carteDuNiveau = this.add.tilemap("global");
         // on load l'image liée au tiled
@@ -65,6 +67,9 @@ export default class global extends Phaser.Scene {
           tileset
         );
 
+        this.potions = this.add.group();
+        this.potions.add(this.add.image(32*32, 21*32, 'potion'));
+
         if(this.spawnX && this.spawnY){
           this.player = new Player(this, this.spawnX, this.spawnY, 'boug');
         }
@@ -75,6 +80,8 @@ export default class global extends Phaser.Scene {
 
         this.ratus = this.add.group();
 
+        
+
         this.miniBoss = new miniBoss(this, 25*32, 13*32, 'boss1');
 
         this.ratus.add(new Rat(this, 19*32, 39*32, 'rats'));
@@ -83,6 +90,8 @@ export default class global extends Phaser.Scene {
         this.ratus.add(new Rat(this, 1200, 2000, 'rats'));
         //this.ratus.add(new Rat(this, 1200, 2000, 'rats'));
         //this.ratus.add(new Rat(this, 1200, 2000, 'rats'));
+
+        
 
 
         this.barrePV = this.add.sprite(300 , 150, 'healthBar').setScrollFactor(0, 0);
@@ -97,6 +106,9 @@ export default class global extends Phaser.Scene {
         this.physics.add.collider(this.player, this.ratus, this.toucheRatus, null, this);
         
         this.physics.add.collider(this.ratus, carteCollider);
+
+        this.physics.add.overlap(this.player, this.potions, this.soins, null, this);
+
         this.physics.add.collider(this.ratus, carteHaies);
         this.physics.add.collider(this.miniBoss, carteCollider);
         this.physics.add.collider(this.miniBoss, carteHaies);
@@ -110,6 +122,8 @@ export default class global extends Phaser.Scene {
         this.physics.add.collider(this.player, carteVersCuisine, this.goCuisine, null , this);
         carteVersQuarters.setCollisionByExclusion(-1, true);
         this.physics.add.collider(this.player, carteVersQuarters, this.goQuarters, null , this);
+
+        
         
         
         carteCollider.setPipeline('Light2D');
@@ -121,6 +135,11 @@ export default class global extends Phaser.Scene {
         this.ratus.getChildren().forEach((rat) => {
           rat.setPipeline('Light2D');
         });
+        this.potions.getChildren().forEach((pot) => {
+          pot.setPipeline('Light2D');
+        });
+
+
         this.lights.enable().setAmbientColor(0x3333ff);
 
         this.light = this.lights.addLight(180, 80, 500).setColor(0xf1af0c).setIntensity(1);
@@ -220,6 +239,12 @@ export default class global extends Phaser.Scene {
       }, 3000)
       }
       
+
+    }
+
+    soins(){
+
+      this.playerHP += 1;
 
     }
     goCuisine(){

@@ -359,8 +359,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":6,
- "nextobjectid":1,
+ "nextlayerid":7,
+ "nextobjectid":4,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.9.2",
@@ -369,7 +369,7 @@
         {
          "columns":28,
          "firstgid":1,
-         "image":"E:\/2D\/ZLDLK\/Sprite-0001.png",
+         "image":"D:\/2D\/ZLDLK\/Sprite-0001.png",
          "imageheight":900,
          "imagewidth":900,
          "margin":0,
