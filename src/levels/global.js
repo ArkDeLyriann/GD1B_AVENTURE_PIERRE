@@ -3,6 +3,8 @@ import kitchen from "/src/levels/kitchen.js";
 import menu from "/src/levels/menuPrincipal.js";
 import Rat from "/src/entities/rats.js";
 import miniBoss from "/src/entities/miniBoss.js";
+import Bullet from "/src/entities/bullet.js";
+import Bullets from "/src/entities/bullets.js";
 
 export default class global extends Phaser.Scene {
     // constructeur de la classe
@@ -18,6 +20,7 @@ export default class global extends Phaser.Scene {
     }
 
     preload(){
+        this.load.image('bullet', 'src/assets/bullet.png');
         this.load.image("Phaser_sprite001", "src/assets/Sprite-0001.png");
         this.load.spritesheet("healthBar", "src/assets/lifebar.png",{
         frameWidth: 128,
@@ -28,7 +31,7 @@ export default class global extends Phaser.Scene {
 
     create(){
 
-      
+        
 
         this.clavier = this.input.keyboard.createCursorKeys();
         // on load le tiled
@@ -76,7 +79,13 @@ export default class global extends Phaser.Scene {
         else{this.player = new Player(this, 1216, 2208, 'boug');
         }
         
-        
+        this.bullets = new Bullets(this);
+
+        this.input.on('pointerdown', (pointer) => {
+
+          this.bullets.fireBullet(this.player.x, this.player.y);
+
+      });
 
         this.ratus = this.add.group();
 

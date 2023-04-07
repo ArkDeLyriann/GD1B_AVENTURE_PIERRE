@@ -28,7 +28,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite{
             mouvement.x = 1;
             this.direction = "right";
             this.facing = "right";
-            console.log(this.facing);
+            
             
         } 
         else {
@@ -62,6 +62,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite{
 
         mouvement.normalize();
         this.setVelocity(mouvement.x * PLAYER_SPEED, mouvement.y * PLAYER_SPEED);
+        console.log(this.direction);
 
         this.x = Math.round(this.x);
         this.y = Math.round(this.y);
