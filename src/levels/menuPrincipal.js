@@ -23,7 +23,7 @@ export default class menuPrincipal extends Phaser.Scene {
         frameWidth: 71,
         frameHeight: 58
       });
-      this.load.image("menu", "src/assets/menu.jpg");
+      this.load.image("menu", "src/assets/menuPrincipal.png");
       // chargement de la carte
       this.load.tilemapTiledJSON("cuisine", "src/assets/cuisine.json");
       // chargement de la carte
@@ -39,7 +39,7 @@ export default class menuPrincipal extends Phaser.Scene {
 
     create() {
 
-        this.add.image(1200, 720, 'menu');
+        this.add.image(600, 360, 'menu');
 
         this.anims.create({
           key: "full",

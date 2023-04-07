@@ -87,6 +87,7 @@ export default class global extends Phaser.Scene {
 
         this.barrePV = this.add.sprite(300 , 150, 'healthBar',0).setScrollFactor(0, 0);
         this.barrePV.setScale(1.5);
+        this.barrePV.setAlpha(0.001);
 
         this.player.refreshBody();
         this.physics.add.collider(this.player, carteCollider);
@@ -95,6 +96,7 @@ export default class global extends Phaser.Scene {
         carteHaies.setCollisionByExclusion(-1, true);
         this.player.setScale(1);
         this.physics.add.collider(this.player, this.ratus, this.toucheRatus, null, this);
+        this.player.setAlpha(0);
         
         this.physics.add.collider(this.ratus, carteCollider);
         this.physics.add.collider(this.ratus, carteHaies);
