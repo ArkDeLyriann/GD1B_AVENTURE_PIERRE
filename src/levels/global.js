@@ -96,7 +96,6 @@ export default class global extends Phaser.Scene {
         this.ratus.add(new Rat(this, 19*32, 39*32, 'rats'));
         this.ratus.add(new Rat(this, 30*32, 35*32, 'rats'));
         this.ratus.add(new Rat(this, 50*32, 40*32, 'rats'));
-        this.ratus.add(new Rat(this, 1200, 2000, 'rats'));
         //this.ratus.add(new Rat(this, 1200, 2000, 'rats'));
         //this.ratus.add(new Rat(this, 1200, 2000, 'rats'));
 
@@ -113,6 +112,8 @@ export default class global extends Phaser.Scene {
         carteHaies.setCollisionByExclusion(-1, true);
         this.player.setScale(1);
         this.physics.add.collider(this.player, this.ratus, this.toucheRatus, null, this);
+
+        this.physics.add.collider(this.bullets, this.ratus, this.killRat, null, this);
         
         this.physics.add.collider(this.ratus, carteCollider);
 
@@ -250,6 +251,16 @@ export default class global extends Phaser.Scene {
       
 
     }
+
+    /*killRat(){
+
+      this.ratus.getChildren().forEach((rat) => {
+        if ()
+      
+      });
+
+
+    }*/
 
     soins(){
 

@@ -15,15 +15,12 @@ export default class Bullet extends Phaser.Physics.Arcade.Sprite
         this.setVisible(true);
         if(this.direction = "up"){
             this.setVelocityY(-300);
-        }
-        else if(this.direction = "down"){
+        }else if(this.direction = "down"){
             this.setVelocityY(300);
-        }
-        else if(this.direction = "left"){
+        }else if(this.direction = "left"){
             this.setVelocityX(-300);
-        }
-        else if(this.direction = "right"){
-            this.setVelocityX(300);
+        }else if(this.direction = "up"){
+            this.setVelocityX(-300);
         }
     }
 
