@@ -81,8 +81,8 @@ export default class global extends Phaser.Scene {
         
         this.bullets = new Bullets(this);
 
-        this.input.on('pointerdown', (pointer) => {
-
+        this.input.on('pointerdown', (pointer ) => {
+          console.log("haha");
           this.bullets.fireBullet(this.player.x, this.player.y);
 
       });

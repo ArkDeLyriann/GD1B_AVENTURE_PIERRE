@@ -7,21 +7,48 @@ export default class Bullet extends Phaser.Physics.Arcade.Sprite
         super(scene, x, y, 'bullet');
     }
 
-    fire (x, y)
+    upfire (x, y)
     {
         this.body.reset(x, y);
 
         this.setActive(true);
         this.setVisible(true);
-        if(this.direction = "up"){
-            this.setVelocityY(-300);
-        }else if(this.direction = "down"){
-            this.setVelocityY(300);
-        }else if(this.direction = "left"){
-            this.setVelocityX(-300);
-        }else if(this.direction = "up"){
-            this.setVelocityX(-300);
-        }
+        
+        this.setVelocityY(-300);
+        
+    }
+
+    downfire (x, y)
+    {
+        this.body.reset(x, y);
+
+        this.setActive(true);
+        this.setVisible(true);
+        
+        this.setVelocityY(300);
+        
+    }
+
+    leftfire (x, y)
+    {
+        this.body.reset(x, y);
+
+        this.setActive(true);
+        this.setVisible(true);
+        
+        this.setVelocityX(-300);
+        
+    }
+
+    rightfire (x, y)
+    {
+        this.body.reset(x, y);
+
+        this.setActive(true);
+        this.setVisible(true);
+        
+        this.setVelocityX(300);
+        
     }
 
     preUpdate (time, delta)
