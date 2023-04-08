@@ -70,8 +70,7 @@ export default class global extends Phaser.Scene {
           tileset
         );
 
-        //création des potions
-        this.potion1 = this.physics.add.sprite(32*32, 21*32, 'potion');
+        
         
 
         //coordonnées du spawn joueur
@@ -80,6 +79,9 @@ export default class global extends Phaser.Scene {
         }
         else{this.player = new Player(this, 1216, 2208, 'boug');
         }
+
+        //création des potions
+        this.potion1 = this.physics.add.sprite(32*32, 21*32, 'potion');
         
 
         //Création des balles
@@ -141,7 +143,7 @@ export default class global extends Phaser.Scene {
         
         //collisions des balles
         this.physics.add.collider(this.bullets, this.ratus, this.killRat, null, this);
-        this.physics.add.collider(this.bullets, carteCollider, this.bulletWall, null, this);
+        //this.physics.add.collider(this.bullets, carteCollider, this.bulletWall, null, this);
 
         //collisions des rats
         this.physics.add.collider(this.ratus, carteHaies);
