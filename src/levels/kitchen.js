@@ -12,6 +12,7 @@ export default class kitchen extends Phaser.Scene {
 
   init(data){
     this.playerHP = data.playerHP
+    this.thune = data.thune
   }
 
 
@@ -113,7 +114,8 @@ export default class kitchen extends Phaser.Scene {
     this.scene.start("global", {
       playerHP : this.playerHP,
       x:17*32, 
-      y:22*32
+      y:22*32,
+      thune : this.thune
     });
 
   }

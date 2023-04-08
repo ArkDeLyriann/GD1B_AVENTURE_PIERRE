@@ -14,7 +14,7 @@ export default class Bullet extends Phaser.Physics.Arcade.Sprite
         this.setActive(true);
         this.setVisible(true);
         
-        this.setVelocityY(-300);
+        this.setVelocityY(-800);
         
     }
 
@@ -25,7 +25,7 @@ export default class Bullet extends Phaser.Physics.Arcade.Sprite
         this.setActive(true);
         this.setVisible(true);
         
-        this.setVelocityY(300);
+        this.setVelocityY(800);
         
     }
 
@@ -36,7 +36,7 @@ export default class Bullet extends Phaser.Physics.Arcade.Sprite
         this.setActive(true);
         this.setVisible(true);
         
-        this.setVelocityX(-300);
+        this.setVelocityX(-800);
         
     }
 
@@ -47,15 +47,15 @@ export default class Bullet extends Phaser.Physics.Arcade.Sprite
         this.setActive(true);
         this.setVisible(true);
         
-        this.setVelocityX(300);
+        this.setVelocityX(800);
         
     }
 
-    hitwall ()
+    /*hitwall ()   //test de collider entre bullet et mon claque de murs 
     {
         this.setActive(false);
         this.setVisible(false);
-    }
+    }*/
 
     preUpdate (time, delta)
     {

@@ -43,6 +43,7 @@ export default class menuPrincipal extends Phaser.Scene {
 
     create() {
         this.playerHP = 5
+        this.thune = 0
 
         this.add.image(600, 360, 'menu');
 
@@ -147,7 +148,8 @@ export default class menuPrincipal extends Phaser.Scene {
         if (this.clavier.space.isDown) {
             this.scene.stop();
             this.game.scene.start("global",{
-              playerHP : this.playerHP
+              playerHP : this.playerHP,
+              thune : this.thune
             });
 
         }

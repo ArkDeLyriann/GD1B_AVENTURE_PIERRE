@@ -12,6 +12,7 @@ export default class quarters extends Phaser.Scene {
     }
     init(data){
         this.playerHP = data.playerHP
+        this.thune = data.thune
       }
     preload() {
         this.load.image("Phaser_sprite001", "src/assets/Sprite-0001.png");
@@ -122,6 +123,7 @@ export default class quarters extends Phaser.Scene {
             x:48*32, 
             y:8*32,
             playerHP : this.playerHP,
+            thune : this.thune
           });
 
     }
@@ -132,6 +134,7 @@ export default class quarters extends Phaser.Scene {
             x:51*32, 
             y:20*32,
             playerHP : this.playerHP,
+            thune : this.thune
           });
 
     }

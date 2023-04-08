@@ -16,6 +16,7 @@ export default class global extends Phaser.Scene {
       this.spawnX = data.x
       this.spawnY = data.y
       this.playerHP = data.playerHP
+      this.thune = data.thune
       
     }
 
@@ -110,15 +111,25 @@ export default class global extends Phaser.Scene {
         
         //Création du mini Boss
         this.miniBoss = new miniBoss(this, 25*32, 13*32, 'boss1');
+        this.pvMiniBoss = 200;
         
         
         //Création des rats
         this.ratus = this.add.group();
-        this.ratus.add(new Rat(this, 19*32, 39*32, 'rats'));
-        this.ratus.add(new Rat(this, 30*32, 35*32, 'rats'));
-        this.ratus.add(new Rat(this, 50*32, 40*32, 'rats'));
-        //this.ratus.add(new Rat(this, 1200, 2000, 'rats'));
-        //this.ratus.add(new Rat(this, 1200, 2000, 'rats'));
+        this.rat1 = new Rat(this, 19*32, 39*32, 'rats');
+        this.rat2 = new Rat(this, 30*32, 35*32, 'rats');
+        this.rat3 = new Rat(this, 50*32, 40*32, 'rats');
+        this.rat4 = new Rat(this, 23*32, 21*32, 'rats');
+        this.rat5 = new Rat(this, 42*32, 39*32, 'rats');
+
+        this.ratsvivants = 5;
+
+        this.ratus.add(this.rat1);
+        this.ratus.add(this.rat2);
+        this.ratus.add(this.rat3);
+        this.ratus.add(this.rat4);
+        this.ratus.add(this.rat5);
+        
 
         
 
@@ -133,7 +144,7 @@ export default class global extends Phaser.Scene {
         carteCollider.setCollisionByExclusion(-1, true);
         this.physics.add.collider(this.player, carteHaies);
         carteHaies.setCollisionByExclusion(-1, true);
-        this.physics.add.collider(this.player, this.ratus, this.toucheRatus, null, this);
+        this.physics.add.overlap(this.player, this.ratus, this.toucheRatus, null, this);
         this.physics.add.collider(this.player, this.potion1, this.soins, null, this);
         carteVersCuisine.setCollisionByExclusion(-1, true);
         this.physics.add.collider(this.player, carteVersCuisine, this.goCuisine, null , this);
@@ -142,8 +153,13 @@ export default class global extends Phaser.Scene {
         
         
         //collisions des balles
-        this.physics.add.collider(this.bullets, this.ratus, this.killRat, null, this);
-        //this.physics.add.collider(this.bullets, carteCollider, this.bulletWall, null, this);
+        this.physics.add.collider(this.bullets, this.rat1, this.killRat1, null, this);
+        this.physics.add.collider(this.bullets, this.rat2, this.killRat2, null, this);
+        this.physics.add.collider(this.bullets, this.rat3, this.killRat3, null, this);
+        this.physics.add.collider(this.bullets, this.rat4, this.killRat4, null, this);
+        this.physics.add.collider(this.bullets, this.rat5, this.killRat5, null, this);
+        this.physics.add.collider(this.bullets, this.miniBoss, this.hitBoss, null, this);
+        //this.physics.add.collider(this.bullets, carteCollider, this.bulletWall, null, this);          //Test de collider entre les balles et les murs (inconcluant)
 
         //collisions des rats
         this.physics.add.collider(this.ratus, carteHaies);
@@ -267,7 +283,9 @@ export default class global extends Phaser.Scene {
           return;
         }
         
-        
+        if (this.ratsvivants <=0){
+          clearInterval(this.intervalMoveRatus);
+        }
         
 
     }
@@ -275,6 +293,10 @@ export default class global extends Phaser.Scene {
 
 
     //#############FONCTIONS###########//
+    
+    
+    
+    //Fonctions de collision joueur/ennemi
     toucheRatus(){
       if (this.player.alpha==1){
       this.playerHP -= 1;
@@ -288,12 +310,68 @@ export default class global extends Phaser.Scene {
 
     }
 
-    bulletWall(){
+
+
+    //Fonctions pour tuer les ennemis
+    killRat1(){
+      this.rat1.destroy();
+      this.thune += 10;
+      this.ratsvivants -= 1;
+
+    }
+    killRat2(){
+      this.rat2.destroy();
+      this.thune += 10;
+      this.ratsvivants -= 1;
+    }
+    killRat3(){
+      this.rat3.destroy();
+      this.thune += 10;
+      this.ratsvivants -= 1;
+    }
+    killRat4(){
+      this.rat4.destroy();
+      this.thune += 10;
+      this.ratsvivants -= 1;
+
+    }
+    killRat5(){
+      this.rat5.destroy();
+      this.thune += 10;
+      this.ratsvivants -= 1;
+
+    }
+
+    hitBoss(){
+      
+      if (this.pvMiniBoss >0){
+        this.pvMiniBoss -= 1;
+      }else{
+        this.miniBoss.destroy();
+        this.bossLight.setIntensity(0);
+        this.thune += 100;
+        clearInterval(this.intervalBoss);
+
+      }
+      
+
+
+    }
+
+
+
+
+
+
+
+    
+
+    /*bulletWall(){   // test de collider entre murs et balles
 
       this.bullets.bulletHitWall();
 
 
-    }
+    }*/
 
     soins(){
 
@@ -301,19 +379,43 @@ export default class global extends Phaser.Scene {
       this.potion1.disableBody(true);
 
     }
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //Fonctions de changement de scene
     goCuisine(){
       this.scene.stop();
-        
+      clearInterval(this.intervalMoveRatus);
+      clearInterval(this.intervalBoss);
       this.scene.start("kitchen",{
-        playerHP : this.playerHP
+        playerHP : this.playerHP,
+        thune : this.thune
       })
 
     }
 
     goQuarters(){
-        
+      this.scene.stop();
+      clearInterval(this.intervalMoveRatus);
+      clearInterval(this.intervalBoss);
       this.scene.start("quarters",{
-        playerHP : this.playerHP
+        playerHP : this.playerHP,
+        thune : this.thune
       })
 
     }

@@ -10,11 +10,7 @@ export default class Rat extends Phaser.Physics.Arcade.Sprite{
         this.setCollideWorldBounds(true);
     }
 
-    create(){
-
-
-    }
-
+    
     update(){
         if (this.velocity.x > 0) {
             this.anims.play("rat_right", true);
