@@ -51,11 +51,32 @@ export default class Bullet extends Phaser.Physics.Arcade.Sprite
         
     }
 
+    hitwall ()
+    {
+        this.setActive(false);
+        this.setVisible(false);
+    }
+
     preUpdate (time, delta)
     {
         super.preUpdate(time, delta);
 
         if (this.y <= -32)
+        {
+            this.setActive(false);
+            this.setVisible(false);
+        }
+        if (this.y >= 1920)
+        {
+            this.setActive(false);
+            this.setVisible(false);
+        }
+        if (this.x <= -32)
+        {
+            this.setActive(false);
+            this.setVisible(false);
+        }
+        if (this.x >= 1920)
         {
             this.setActive(false);
             this.setVisible(false);

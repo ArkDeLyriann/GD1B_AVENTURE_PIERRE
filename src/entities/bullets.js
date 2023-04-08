@@ -16,22 +16,47 @@ export default class Bullets extends Phaser.Physics.Arcade.Group
         });
     }
 
-    fireBullet (x, y)
+    fireBulletUP (x, y)
     {
         let bullet = this.getFirstDead(false);
 
         if (bullet)
         {  
-            if(this.direction = "up"){
-                bullet.upfire(x, y);
-            }else if(this.direction = "down"){
-                bullet.downfire(x, y);
-            }else if(this.direction = "left"){
-                bullet.leftfire(x, y);
-            }else if(this.direction = "right"){
-                bullet.rightfire(x, y);
-            }
-            
+            bullet.upfire(x, y);
         }
+    }
+    fireBulletDOWN (x, y)
+    {
+        let bullet = this.getFirstDead(false);
+
+        if (bullet)
+        {  
+            bullet.downfire(x, y);
+        }
+    }
+    fireBulletLEFT (x, y)
+    {
+        let bullet = this.getFirstDead(false);
+
+        if (bullet)
+        {  
+            bullet.leftfire(x, y);
+        }
+    }
+    fireBulletRIGHT (x, y)
+    {
+        let bullet = this.getFirstDead(false);
+
+        if (bullet)
+        {  
+            bullet.rightfire(x, y);
+        }
+    }
+
+    bulletHitWall()
+    {   
+        let bullet = this.getFirstDead(false);
+        
+        bullet.hitwall();
     }
 }
