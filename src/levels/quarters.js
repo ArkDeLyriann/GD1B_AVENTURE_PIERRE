@@ -116,6 +116,18 @@ export default class quarters extends Phaser.Scene {
     
     
     }
+
+
+
+
+    soins(){
+      console.log("touchepotion");
+      
+      this.playerHP += 1;
+      this.potion1.destroy(true);
+      console.log(this.playerHP);
+
+    }
    
     goSuite(){
         

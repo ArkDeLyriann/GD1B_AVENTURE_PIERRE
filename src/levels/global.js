@@ -263,8 +263,7 @@ export default class global extends Phaser.Scene {
         
         // Barre de vie
         if (this.playerHP == 5){
-          //console.log(this.barrePV);
-      //    this.barrePV.anims.play('full');
+           this.barrePV.anims.play('full');
         }
         else if (this.playerHP == 4){
           this.barrePV.anims.play('1hit');
@@ -374,9 +373,11 @@ export default class global extends Phaser.Scene {
     }*/
 
     soins(){
-      console.log("touchepotion")
+      console.log("touchepotion");
+      
       this.playerHP += 1;
       this.potion1.destroy(true);
+      console.log(this.playerHP);
 
     }
 

@@ -50,6 +50,8 @@ export default class kitchen extends Phaser.Scene {
 
     
   
+    // Joueur
+
 
     this.player = new Player(this, 1376, 1888, 'boug');
     this.player.refreshBody();
@@ -57,8 +59,33 @@ export default class kitchen extends Phaser.Scene {
     carteMurs.setCollisionByExclusion(-1, true);
     this.physics.world.setBounds(0, 0, 1920, 1920);
 
-    this.enemy = new Rat(this, 50*32, 40*32, 'rats')
-    this.physics.add.collider(this.player, this.enemy, this.toucheRatus, null, this);
+    this.physics.add.overlap(this.player, this.ratus, this.toucheRatus, null, this);
+    
+
+
+    // rats
+
+
+    this.ratus = this.add.group();
+    this.rat1 = new Rat(this, 35*32, 6*32, 'rats');
+    this.rat2 = new Rat(this, 45*32, 8*32, 'rats');
+    this.rat3 = new Rat(this, 47*32, 48*32, 'rats');
+    this.rat4 = new Rat(this, 47*32, 43*32, 'rats');
+    this.rat5 = new Rat(this, 42*32, 39*32, 'rats');
+
+    this.ratus.add(this.rat1);
+    this.ratus.add(this.rat2);
+    this.ratus.add(this.rat3);
+    this.ratus.add(this.rat4);
+    this.ratus.add(this.rat5);
+
+
+    this.physics.add.collider(this.ratus, carteMurs);
+    this.physics.add.overlap(this.player, this.ratus, this.toucheRatus, null, this);
+    
+
+    //hud
+    
 
     this.barrePV = this.add.sprite(300 , 150, 'healthBar').setScrollFactor(0, 0);
     this.barrePV.setScale(1.5);
@@ -66,9 +93,13 @@ export default class kitchen extends Phaser.Scene {
     carteSortie.setCollisionByExclusion(-1, true);
     this.physics.add.collider(this.player, carteSortie, this.goOutside, null , this);
 
+
+    //camera
     this.cameras.main.setBounds(0, 0, 1920, 1920);
     this.cameras.main.setZoom(1.5);
     this.cameras.main.startFollow(this.player);
+
+    //lights
 
     carteCuisine.setPipeline('Light2D');
     carteMurs.setPipeline('Light2D');
@@ -79,7 +110,38 @@ export default class kitchen extends Phaser.Scene {
     this.lights.enable().setAmbientColor(0x333333);
 
     this.light = this.lights.addLight(180, 80, 800).setColor(0xf1af0c).setIntensity(1.3);
-}
+
+
+
+
+    this.intervalMoveRatus = setInterval(() => {
+      this.ratus.getChildren().forEach((rat) => {
+        const randNumber = Math.floor((Math.random() * 4) + 1);
+        switch(randNumber) {
+          case 1:
+            rat.body.setVelocityX(50);
+            //this.anims.play("rat_right", true);
+            break;
+          case 2:
+            rat.body.setVelocityX(-50);
+            //this.anims.play("rat_left", true);
+            break;
+          case 3:
+            rat.body.setVelocityY(-50);
+            //this.anims.play("rat_Up", true);
+            break;
+          case 4:
+            rat.body.setVelocityY(50);
+            //this.anims.play("rat_Down", true);
+            
+            break;
+          
+        }
+      });
+    }, 1000);
+
+
+  }
 
   update(){
     this.player.update();
@@ -106,6 +168,17 @@ export default class kitchen extends Phaser.Scene {
       this.barrePV.anims.play('ded');
       return;
     }
+
+  }
+
+
+
+  soins(){
+    console.log("touchepotion");
+    
+    this.playerHP += 1;
+    this.potion1.destroy(true);
+    console.log(this.playerHP);
 
   }
 
