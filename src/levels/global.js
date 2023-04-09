@@ -145,7 +145,7 @@ export default class global extends Phaser.Scene {
         this.physics.add.collider(this.player, carteHaies);
         carteHaies.setCollisionByExclusion(-1, true);
         this.physics.add.overlap(this.player, this.ratus, this.toucheRatus, null, this);
-        this.physics.add.collider(this.player, this.potion1, this.soins, null, this);
+        this.physics.add.overlap(this.player, this.potion1, this.soins, null, this);
         carteVersCuisine.setCollisionByExclusion(-1, true);
         this.physics.add.collider(this.player, carteVersCuisine, this.goCuisine, null , this);
         carteVersQuarters.setCollisionByExclusion(-1, true);
@@ -374,9 +374,9 @@ export default class global extends Phaser.Scene {
     }*/
 
     soins(){
-
+      console.log("touchepotion")
       this.playerHP += 1;
-      this.potion1.disableBody(true);
+      this.potion1.destroy(true);
 
     }
 
