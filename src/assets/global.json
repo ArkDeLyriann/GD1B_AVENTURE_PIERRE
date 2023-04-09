@@ -208,7 +208,7 @@
          "height":60,
          "id":2,
          "name":"mursMaisons",
-         "offsetx":1.083,
+         "offsetx":0.083,
          "offsety":0.25,
          "opacity":1,
          "type":"tilelayer",
