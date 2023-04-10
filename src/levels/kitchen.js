@@ -1,6 +1,8 @@
 import Player from "../entities/hero.js";
 import menu from "/src/levels/menuPrincipal.js";
 import Rat from "/src/entities/rats.js";
+import Bullet from "/src/entities/bullet.js";
+import Bullets from "/src/entities/bullets.js";
 
 export default class kitchen extends Phaser.Scene {
   // constructeur de la classe
@@ -13,6 +15,8 @@ export default class kitchen extends Phaser.Scene {
   init(data){
     this.playerHP = data.playerHP
     this.thune = data.thune
+    this.havePelle = data.havePelle
+    this.haveGun = data.haveGun
   }
 
 
@@ -60,6 +64,28 @@ export default class kitchen extends Phaser.Scene {
     this.physics.world.setBounds(0, 0, 1920, 1920);
 
     this.physics.add.overlap(this.player, this.ratus, this.toucheRatus, null, this);
+
+
+     //Création des balles
+     this.bullets = new Bullets(this);
+
+
+     //commande PanPan
+    this.input.on('pointerdown', (pointer ) => {
+       console.log(this.player.direction);
+
+
+       if(this.player.direction == 'up'){
+         this.bullets.fireBulletUP(this.player.x, this.player.y);
+       }else  if(this.player.direction == 'down'){
+         this.bullets.fireBulletDOWN(this.player.x, this.player.y);
+       }else  if(this.player.direction == 'left'){
+         this.bullets.fireBulletLEFT(this.player.x, this.player.y);
+       }else if(this.player.direction == 'right'){
+         this.bullets.fireBulletRIGHT(this.player.x, this.player.y);
+       }
+
+    });
     
 
 
@@ -78,6 +104,13 @@ export default class kitchen extends Phaser.Scene {
     this.ratus.add(this.rat3);
     this.ratus.add(this.rat4);
     this.ratus.add(this.rat5);
+
+
+    this.physics.add.collider(this.bullets, this.rat1, this.killRat1, null, this);
+    this.physics.add.collider(this.bullets, this.rat2, this.killRat2, null, this);
+    this.physics.add.collider(this.bullets, this.rat3, this.killRat3, null, this);
+    this.physics.add.collider(this.bullets, this.rat4, this.killRat4, null, this);
+    this.physics.add.collider(this.bullets, this.rat5, this.killRat5, null, this);
 
 
     this.physics.add.collider(this.ratus, carteMurs);
@@ -192,6 +225,40 @@ export default class kitchen extends Phaser.Scene {
     });
 
   }
+
+
+
+  //Fonctions pour tuer les ennemis
+  killRat1(){
+    this.rat1.destroy();
+    this.thune += 10;
+    this.ratsvivants -= 1;
+
+  }
+  killRat2(){
+    this.rat2.destroy();
+    this.thune += 10;
+    this.ratsvivants -= 1;
+  }
+  killRat3(){
+    this.rat3.destroy();
+    this.thune += 10;
+    this.ratsvivants -= 1;
+  }
+  killRat4(){
+    this.rat4.destroy();
+    this.thune += 10;
+    this.ratsvivants -= 1;
+
+  }
+  killRat5(){
+    this.rat5.destroy();
+    this.thune += 10;
+    this.ratsvivants -= 1;
+
+  }
+
+
 
   toucheRatus(){
     if (this.player.alpha==1){

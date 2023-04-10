@@ -19,6 +19,19 @@ export default class menuPrincipal extends Phaser.Scene {
         frameWidth: 32,
         frameHeight: 32
       })
+
+
+      this.load.spritesheet('debris', "src/assets/debris.png",{
+        frameWidth: 32,
+        frameHeight: 32
+      })
+
+      this.load.spritesheet('pelle', "src/assets/loot_pelle.png",{
+        frameWidth: 32,
+        frameHeight: 32
+      })
+
+
       this.load.spritesheet("boss1", "src/assets/boss_1.png", {
         frameWidth: 64,
         frameHeight: 96
@@ -44,6 +57,8 @@ export default class menuPrincipal extends Phaser.Scene {
     create() {
         this.playerHP = 5
         this.thune = 0
+        this.havePelle = false
+        this.haveGun = true
 
         this.add.image(600, 360, 'menu');
 
@@ -149,7 +164,9 @@ export default class menuPrincipal extends Phaser.Scene {
             this.scene.stop();
             this.game.scene.start("global",{
               playerHP : this.playerHP,
-              thune : this.thune
+              thune : this.thune,
+              havePelle : this.havePelle,
+              haveGun : this.haveGun
             });
 
         }

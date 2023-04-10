@@ -13,6 +13,8 @@ export default class quarters extends Phaser.Scene {
     init(data){
         this.playerHP = data.playerHP
         this.thune = data.thune
+        this.havePelle = data.havePelle
+        this.haveGun = data.haveGun
       }
     preload() {
         this.load.image("Phaser_sprite001", "src/assets/Sprite-0001.png");

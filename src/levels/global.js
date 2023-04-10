@@ -17,6 +17,8 @@ export default class global extends Phaser.Scene {
       this.spawnY = data.y
       this.playerHP = data.playerHP
       this.thune = data.thune
+      this.havePelle = data.havePelle
+      this.haveGun = data.haveGun
       
     }
 
@@ -83,25 +85,45 @@ export default class global extends Phaser.Scene {
 
         //création des potions
         this.potion1 = this.physics.add.sprite(32*32, 21*32, 'potion');
-        
+
+
+        //les débris
+        this.lesDebris = this.add.group();
+
+
+
+        this.debris1 = this.physics.add.staticSprite(785, 913, 'debris');
+        this.debris2 = this.physics.add.staticSprite(785, 945, 'debris');
+        this.debris3 = this.physics.add.staticSprite(1071, 26*32, 'debris');
+        this.debris4 = this.physics.add.staticSprite(1201, 689, 'debris');
+        this.debris5 = this.physics.add.staticSprite (1201, 721, 'debris');
+
+
+        this.lesDebris.add(this.debris1);
+        this.lesDebris.add(this.debris2);
+        this.lesDebris.add(this.debris3);
+        this.lesDebris.add(this.debris4);
+        this.lesDebris.add(this.debris5);
 
         //Création des balles
         this.bullets = new Bullets(this);
+        
 
 
         //commande PanPan
         this.input.on('pointerdown', (pointer ) => {
           console.log(this.player.direction);
 
-
-          if(this.player.direction == 'up'){
-            this.bullets.fireBulletUP(this.player.x, this.player.y);
-          }else  if(this.player.direction == 'down'){
-            this.bullets.fireBulletDOWN(this.player.x, this.player.y);
-          }else  if(this.player.direction == 'left'){
-            this.bullets.fireBulletLEFT(this.player.x, this.player.y);
-          }else if(this.player.direction == 'right'){
-            this.bullets.fireBulletRIGHT(this.player.x, this.player.y);
+          if(this.haveGun == true){
+            if(this.player.direction == 'up'){
+              this.bullets.fireBulletUP(this.player.x, this.player.y);
+            }else  if(this.player.direction == 'down'){
+              this.bullets.fireBulletDOWN(this.player.x, this.player.y);
+            }else  if(this.player.direction == 'left'){
+              this.bullets.fireBulletLEFT(this.player.x, this.player.y);
+            }else if(this.player.direction == 'right'){
+              this.bullets.fireBulletRIGHT(this.player.x, this.player.y);
+            }
           }
 
       });
@@ -144,12 +166,21 @@ export default class global extends Phaser.Scene {
         carteCollider.setCollisionByExclusion(-1, true);
         this.physics.add.collider(this.player, carteHaies);
         carteHaies.setCollisionByExclusion(-1, true);
+        
         this.physics.add.overlap(this.player, this.ratus, this.toucheRatus, null, this);
         this.physics.add.overlap(this.player, this.potion1, this.soins, null, this);
         carteVersCuisine.setCollisionByExclusion(-1, true);
         this.physics.add.collider(this.player, carteVersCuisine, this.goCuisine, null , this);
         carteVersQuarters.setCollisionByExclusion(-1, true);
         this.physics.add.collider(this.player, carteVersQuarters, this.goQuarters, null , this);
+
+
+        //les debris
+        this.physics.add.collider(this.player, this.debris1, this.pelle1, null, this);
+        this.physics.add.collider(this.player, this.debris2, this.pelle2, null, this);
+        this.physics.add.collider(this.player, this.debris3, this.pelle3, null, this);
+        this.physics.add.collider(this.player, this.debris4, this.pelle4, null, this);
+        this.physics.add.collider(this.player, this.debris5, this.pelle5, null, this);
         
         
         //collisions des balles
@@ -358,7 +389,14 @@ export default class global extends Phaser.Scene {
     }
 
 
-
+    pelle1(){
+      if (this.havePelle == true){
+        this.debris1.destroy();
+      }
+      else{
+        console.log("pas de pelle");
+      }
+    }
 
 
 
@@ -405,7 +443,9 @@ export default class global extends Phaser.Scene {
       clearInterval(this.intervalBoss);
       this.scene.start("kitchen",{
         playerHP : this.playerHP,
-        thune : this.thune
+        thune : this.thune,
+        havePelle : this.havePelle,
+        haveGun : this.haveGun
       })
 
     }
@@ -416,7 +456,9 @@ export default class global extends Phaser.Scene {
       clearInterval(this.intervalBoss);
       this.scene.start("quarters",{
         playerHP : this.playerHP,
-        thune : this.thune
+        thune : this.thune,
+        havePelle : this.havePelle,
+        haveGun : this.haveGun
       })
 
     }
