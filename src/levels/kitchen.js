@@ -105,12 +105,23 @@ export default class kitchen extends Phaser.Scene {
     this.rat3 = new Rat(this, 47*32, 48*32, 'rats');
     this.rat4 = new Rat(this, 47*32, 43*32, 'rats');
     this.rat5 = new Rat(this, 42*32, 39*32, 'rats');
+    this.rat6 = new Rat(this, 23*32, 32*32, 'rats');
+    this.rat7 = new Rat(this, 23*32, 23*32, 'rats');
+    this.rat8 = new Rat(this, 32*32, 35*32, 'rats');
+    this.rat9 = new Rat(this, 15*32, 46*32, 'rats');
+    this.rat10 = new Rat(this, 5*32, 20*32, 'rats');
 
     this.ratus.add(this.rat1);
     this.ratus.add(this.rat2);
     this.ratus.add(this.rat3);
     this.ratus.add(this.rat4);
     this.ratus.add(this.rat5);
+    this.ratus.add(this.rat6);
+    this.ratus.add(this.rat7);
+    this.ratus.add(this.rat8);
+    this.ratus.add(this.rat9);
+    this.ratus.add(this.rat10);
+    
 
 
     this.physics.add.collider(this.bullets, this.rat1, this.killRat1, null, this);
@@ -118,6 +129,12 @@ export default class kitchen extends Phaser.Scene {
     this.physics.add.collider(this.bullets, this.rat3, this.killRat3, null, this);
     this.physics.add.collider(this.bullets, this.rat4, this.killRat4, null, this);
     this.physics.add.collider(this.bullets, this.rat5, this.killRat5, null, this);
+    this.physics.add.collider(this.bullets, this.rat6, this.killRat6, null, this);
+    this.physics.add.collider(this.bullets, this.rat7, this.killRat7, null, this);
+    this.physics.add.collider(this.bullets, this.rat8, this.killRat8, null, this);
+    this.physics.add.collider(this.bullets, this.rat9, this.killRat9, null, this);
+    this.physics.add.collider(this.bullets, this.rat10, this.killRat10, null, this);
+
 
 
     //débris
@@ -220,7 +237,7 @@ export default class kitchen extends Phaser.Scene {
 
     if (this.playerHP == 5){
       //console.log(this.barrePV);
-  //    this.barrePV.anims.play('full');
+      this.barrePV.anims.play('full');
     }
     else if (this.playerHP == 4){
       this.barrePV.anims.play('1hit');
@@ -298,6 +315,36 @@ export default class kitchen extends Phaser.Scene {
   }
   killRat5(){
     this.rat5.destroy();
+    this.thune += 10;
+    this.ratsvivants -= 1;
+
+  }
+  killRat6(){
+    this.rat6.destroy();
+    this.thune += 10;
+    this.ratsvivants -= 1;
+
+  }
+  killRat7(){
+    this.rat7.destroy();
+    this.thune += 10;
+    this.ratsvivants -= 1;
+
+  }
+  killRat8(){
+    this.rat8.destroy();
+    this.thune += 10;
+    this.ratsvivants -= 1;
+
+  }
+  killRat9(){
+    this.rat9.destroy();
+    this.thune += 10;
+    this.ratsvivants -= 1;
+
+  }
+  killRat10(){
+    this.rat10.destroy();
     this.thune += 10;
     this.ratsvivants -= 1;
 
