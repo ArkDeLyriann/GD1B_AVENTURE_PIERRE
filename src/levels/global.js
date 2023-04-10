@@ -105,6 +105,12 @@ export default class global extends Phaser.Scene {
         this.lesDebris.add(this.debris4);
         this.lesDebris.add(this.debris5);
 
+
+        //le gun
+        this.pistol = this.physics.add.sprite(96, 640, 'pistol');
+
+        this.physics.add.overlap(this.player, this.pistol, this.ramasseGun, null, this);
+
         //Création des balles
         this.bullets = new Bullets(this);
         
@@ -113,18 +119,18 @@ export default class global extends Phaser.Scene {
         //commande PanPan
         this.input.on('pointerdown', (pointer ) => {
           console.log(this.player.direction);
-
-          if(this.haveGun == true){
-            if(this.player.direction == 'up'){
-              this.bullets.fireBulletUP(this.player.x, this.player.y);
-            }else  if(this.player.direction == 'down'){
-              this.bullets.fireBulletDOWN(this.player.x, this.player.y);
-            }else  if(this.player.direction == 'left'){
-              this.bullets.fireBulletLEFT(this.player.x, this.player.y);
-            }else if(this.player.direction == 'right'){
-              this.bullets.fireBulletRIGHT(this.player.x, this.player.y);
+          if(this.haveGun == true);
+            if(this.haveGun == true){
+              if(this.player.direction == 'up'){
+                this.bullets.fireBulletUP(this.player.x, this.player.y);
+              }else  if(this.player.direction == 'down'){
+                this.bullets.fireBulletDOWN(this.player.x, this.player.y);
+              }else  if(this.player.direction == 'left'){
+                this.bullets.fireBulletLEFT(this.player.x, this.player.y);
+              }else if(this.player.direction == 'right'){
+                this.bullets.fireBulletRIGHT(this.player.x, this.player.y);
+              }
             }
-          }
 
       });
 
@@ -143,20 +149,26 @@ export default class global extends Phaser.Scene {
         this.rat3 = new Rat(this, 50*32, 40*32, 'rats');
         this.rat4 = new Rat(this, 23*32, 21*32, 'rats');
         this.rat5 = new Rat(this, 42*32, 39*32, 'rats');
+        this.rat6 = new Rat(this, 24*32, 41*32, 'rats');
+        this.rat7 = new Rat(this, 35*32, 41*32, 'rats');
+        this.rat8 = new Rat(this, 13*32, 20*32, 'rats');
 
-        this.ratsvivants = 5;
+        this.ratsvivants = 8;
 
         this.ratus.add(this.rat1);
         this.ratus.add(this.rat2);
         this.ratus.add(this.rat3);
         this.ratus.add(this.rat4);
         this.ratus.add(this.rat5);
+        this.ratus.add(this.rat6);
+        this.ratus.add(this.rat7);
+        this.ratus.add(this.rat8);
         
 
-        
-
-
-        this.barrePV = this.add.sprite(300 , 150, 'healthBar').setScrollFactor(0, 0);
+        this.backUi = this.add.image(900, 165, 'backUi').setScrollFactor(0);
+        this.backUi.setScale(1.5);
+        this.backUi.setAlpha(0.50);
+        this.barrePV = this.add.sprite(900  , 150, 'healthBar').setScrollFactor(0, 0);
         this.barrePV.setScale(1.5);
 
 
@@ -189,6 +201,9 @@ export default class global extends Phaser.Scene {
         this.physics.add.collider(this.bullets, this.rat3, this.killRat3, null, this);
         this.physics.add.collider(this.bullets, this.rat4, this.killRat4, null, this);
         this.physics.add.collider(this.bullets, this.rat5, this.killRat5, null, this);
+        this.physics.add.collider(this.bullets, this.rat6, this.killRat6, null, this);
+        this.physics.add.collider(this.bullets, this.rat7, this.killRat7, null, this);
+        this.physics.add.collider(this.bullets, this.rat8, this.killRat8, null, this);
         this.physics.add.collider(this.bullets, this.miniBoss, this.hitBoss, null, this);
         //this.physics.add.collider(this.bullets, carteCollider, this.bulletWall, null, this);          //Test de collider entre les balles et les murs (inconcluant)
 
@@ -310,6 +325,8 @@ export default class global extends Phaser.Scene {
         }
         else if (this.playerHP == 0){
           this.barrePV.anims.play('ded');
+
+          this.scene.start("menu");
           return;
         }
         
@@ -371,6 +388,26 @@ export default class global extends Phaser.Scene {
       this.ratsvivants -= 1;
 
     }
+    killRat6(){
+      this.rat6.destroy();
+      this.thune += 10;
+      this.ratsvivants -= 1;
+
+    }
+    killRat7(){
+      this.rat7.destroy();
+      this.thune += 10;
+      this.ratsvivants -= 1;
+
+    }
+    killRat8(){
+      this.rat8.destroy();
+      this.thune += 10;
+      this.ratsvivants -= 1;
+
+    }
+
+
 
     hitBoss(){
       
@@ -381,6 +418,7 @@ export default class global extends Phaser.Scene {
         this.bossLight.setIntensity(0);
         this.thune += 100;
         clearInterval(this.intervalBoss);
+        this.scene.start("menu");
 
       }
       
@@ -393,11 +431,40 @@ export default class global extends Phaser.Scene {
       if (this.havePelle == true){
         this.debris1.destroy();
       }
-      else{
-        console.log("pas de pelle");
+    
+    }
+    pelle2(){
+      if (this.havePelle == true){
+        this.debris2.destroy();
       }
+   
+    }
+    pelle3(){
+      if (this.havePelle == true){
+        this.debris3.destroy();
+      }
+    
+    }
+    pelle4(){
+      if (this.havePelle == true){
+        this.debris4.destroy();
+      }
+
+    }
+    pelle5(){
+      if (this.havePelle == true){
+        this.debris5.destroy();
+      }
+      
     }
 
+
+    ramasseGun(){
+      this.haveGun = true;
+      this.pistol.destroy();
+      console.log("j'ai le gun");
+      
+    }
 
 
 

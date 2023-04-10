@@ -137,7 +137,9 @@ export default class quarters extends Phaser.Scene {
             x:48*32, 
             y:8*32,
             playerHP : this.playerHP,
-            thune : this.thune
+            thune : this.thune,
+            havePelle : this.havePelle,
+            haveGun : this.haveGun
           });
 
     }
@@ -148,7 +150,9 @@ export default class quarters extends Phaser.Scene {
             x:51*32, 
             y:20*32,
             playerHP : this.playerHP,
-            thune : this.thune
+            thune : this.thune,
+            havePelle : this.havePelle,
+            haveGun : this.haveGun
           });
 
     }

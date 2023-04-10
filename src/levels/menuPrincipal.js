@@ -15,6 +15,7 @@ export default class menuPrincipal extends Phaser.Scene {
 
       })
       this.load.image("Phaser_sprite001", "src/assets/Sprite-0001.png");
+      this.load.image("backUi", "src/assets/backgroundUI.png");
       this.load.spritesheet('potion', "src/assets/possion.png",{
         frameWidth: 32,
         frameHeight: 32
@@ -30,6 +31,11 @@ export default class menuPrincipal extends Phaser.Scene {
         frameWidth: 32,
         frameHeight: 32
       })
+
+      this.load.spritesheet("pistol", "src/assets/pistoloot.png", {
+        frameWidth: 32,
+        frameHeight: 32
+      });
 
 
       this.load.spritesheet("boss1", "src/assets/boss_1.png", {
@@ -58,7 +64,7 @@ export default class menuPrincipal extends Phaser.Scene {
         this.playerHP = 5
         this.thune = 0
         this.havePelle = false
-        this.haveGun = true
+        this.haveGun = false 
 
         this.add.image(600, 360, 'menu');
 

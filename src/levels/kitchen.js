@@ -72,22 +72,29 @@ export default class kitchen extends Phaser.Scene {
 
      //commande PanPan
     this.input.on('pointerdown', (pointer ) => {
-       console.log(this.player.direction);
+       
+      
+      console.log(this.player.direction);
 
-
-       if(this.player.direction == 'up'){
-         this.bullets.fireBulletUP(this.player.x, this.player.y);
-       }else  if(this.player.direction == 'down'){
-         this.bullets.fireBulletDOWN(this.player.x, this.player.y);
-       }else  if(this.player.direction == 'left'){
-         this.bullets.fireBulletLEFT(this.player.x, this.player.y);
-       }else if(this.player.direction == 'right'){
-         this.bullets.fireBulletRIGHT(this.player.x, this.player.y);
-       }
+      if (this.haveGun = true){
+        if(this.player.direction == 'up'){
+          this.bullets.fireBulletUP(this.player.x, this.player.y);
+        }else  if(this.player.direction == 'down'){
+          this.bullets.fireBulletDOWN(this.player.x, this.player.y);
+        }else  if(this.player.direction == 'left'){
+          this.bullets.fireBulletLEFT(this.player.x, this.player.y);
+        }else if(this.player.direction == 'right'){
+          this.bullets.fireBulletRIGHT(this.player.x, this.player.y);
+        }
+      }
 
     });
     
 
+    //LA PELLE
+    this.pelle = this.physics.add.sprite(5*32, 10*32, 'pelle');
+
+    this.physics.add.overlap(this.player, this.pelle, this.ramassePelle, null, this);
 
     // rats
 
@@ -111,6 +118,36 @@ export default class kitchen extends Phaser.Scene {
     this.physics.add.collider(this.bullets, this.rat3, this.killRat3, null, this);
     this.physics.add.collider(this.bullets, this.rat4, this.killRat4, null, this);
     this.physics.add.collider(this.bullets, this.rat5, this.killRat5, null, this);
+
+
+    //débris
+    this.lesDebris = this.add.group();
+
+    this.debris1 = this.physics.add.staticSprite(1312, 1728, 'debris');
+    this.debris2 = this.physics.add.staticSprite(1312, 1696, 'debris');
+    this.debris3 = this.physics.add.staticSprite(928, 1472, 'debris');
+    this.debris4 = this.physics.add.staticSprite(928, 1440, 'debris');
+    this.debris5 = this.physics.add.staticSprite (1088, 480, 'debris');
+    this.debris6 = this.physics.add.staticSprite (1120, 480, 'debris');
+    this.debris7 = this.physics.add.staticSprite (1152, 480, 'debris');
+
+
+    this.lesDebris.add(this.debris1);
+    this.lesDebris.add(this.debris2);
+    this.lesDebris.add(this.debris3);
+    this.lesDebris.add(this.debris4);
+    this.lesDebris.add(this.debris5);
+    this.lesDebris.add(this.debris6);
+    this.lesDebris.add(this.debris7);
+
+
+    this.physics.add.collider(this.player, this.debris1, this.pelle1, null, this);
+    this.physics.add.collider(this.player, this.debris2, this.pelle2, null, this);
+    this.physics.add.collider(this.player, this.debris3, this.pelle3, null, this);
+    this.physics.add.collider(this.player, this.debris4, this.pelle4, null, this);
+    this.physics.add.collider(this.player, this.debris5, this.pelle5, null, this);
+    this.physics.add.collider(this.player, this.debris6, this.pelle6, null, this);
+    this.physics.add.collider(this.player, this.debris7, this.pelle7, null, this);
 
 
     this.physics.add.collider(this.ratus, carteMurs);
@@ -215,13 +252,21 @@ export default class kitchen extends Phaser.Scene {
 
   }
 
+  ramassePelle(){
+    this.havePelle = true;
+    this.pelle.destroy();
+  }
+
   goOutside(){
-        
+    
+    clearInterval(this.intervalMoveRatus);
     this.scene.start("global", {
       playerHP : this.playerHP,
       x:17*32, 
       y:22*32,
-      thune : this.thune
+      thune : this.thune,
+      havePelle : this.havePelle,
+      haveGun : this.haveGun
     });
 
   }
@@ -270,7 +315,49 @@ export default class kitchen extends Phaser.Scene {
     }, 3000)
     }
   }
+
+  pelle1(){
+    if (this.havePelle == true){
+      this.debris1.destroy();
+    }
+  
+  }
+  pelle2(){
+    if (this.havePelle == true){
+      this.debris2.destroy();
+    }
+ 
+  }
+  pelle3(){
+    if (this.havePelle == true){
+      this.debris3.destroy();
+    }
+  
+  }
+  pelle4(){
+    if (this.havePelle == true){
+      this.debris4.destroy();
+    }
+
+  }
+  pelle5(){
+    if (this.havePelle == true){
+      this.debris5.destroy();
+    }
     
+  }
+  pelle6(){
+    if (this.havePelle == true){
+      this.debris6.destroy();
+    }
+    
+  }
+  pelle7(){
+    if (this.havePelle == true){
+      this.debris7.destroy();
+    }
+    
+  }
 
 
 }
